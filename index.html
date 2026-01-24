@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP Accelerator | Co-Founders Pitch Competition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <!-- Background -->
+            <img src="assets/HeroBackground.jpg" alt="" class="hero-bg">
+
+            <!-- Content Overlay -->
+            <div class="hero-content">
+                <!-- CO-FOUNDERS Logo -->
+                <img src="assets/Co-Founders Logo.png" alt="CO-FOUNDERS" class="hero-logo-cofounders">
+
+                <!-- Presents Text -->
+                <p class="hero-presents">+ All People Powered Presents</p>
+
+                <!-- Event Title (Live Concert & Pitch Contest / April 11th) -->
+                <img src="assets/Title.png" alt="Live Concert & Pitch Contest - April 11th" class="hero-title-img">
+
+                <!-- Buy Tickets Button -->
+                <a href="#" class="btn-tickets">
+                    <img src="assets/ticketsbuttontexture.png" alt="Buy Tickets">
+                </a>
+
+                <!-- Pitches Powered By -->
+                <div class="hero-powered">
+                    <span>Pitches Powered By</span>
+                    <img src="assets/Hii WAV Logo.png" alt="HiiWAV" class="hiiwav-logo">
+                </div>
+
+                <!-- Description Text -->
+                <div class="hero-description">
+                    <p>Live theatrical performances<br>from the Bay Area's hit musical<br>with special guests</p>
+                </div>
+
+                <!-- Sponsors -->
+                <div class="hero-sponsors">
+                    <span class="sponsors-label">Made Possible By</span>
+                    <img src="assets/Sponsors logos.png" alt="Office of Mayor Barbara Lee, Kapor Foundation, Hewlett Foundation, Omidyar Network, Doris Duke Foundation" class="sponsors-img">
+                </div>
+
+                <!-- Venue Bar -->
+                <div class="hero-venue">
+                    <img src="assets/HJK white.png" alt="HJK Arts - Henry J. Kaiser Center for the Arts" class="hjk-logo">
+                    <div class="venue-address">10 10th St, Oakland, CA 94607</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about hidden">
+        <div class="container">
+            <h2 class="section-title">About the Event</h2>
+            <p class="about-text">
+                The All People Powered (APP) Accelerator is a unique opportunity for early-stage founders
+                to pitch their ventures, gain visibility, and connect with a community of supporters.
+                Whether you're building a product, service, or movement—we want to hear your story.
+            </p>
+            <p class="about-text">
+                Selected founders will present their ideas live on stage alongside theatrical performances
+                from the Bay Area hit musical, with special guests.
+            </p>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="application hidden">
+        <div class="container">
+            <h2 class="section-title">Apply Now</h2>
+
+            <!-- Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-steps">
+                    <span class="step active" data-step="1">1</span>
+                    <span class="step" data-step="2">2</span>
+                    <span class="step" data-step="3">3</span>
+                    <span class="step" data-step="4">4</span>
+                    <span class="step" data-step="5">5</span>
+                    <span class="step" data-step="6">6</span>
+                    <span class="step" data-step="7">7</span>
+                    <span class="step" data-step="8">8</span>
+                </div>
+                <div class="progress-labels">
+                    <span>Founder</span>
+                    <span>Venture</span>
+                    <span>Market</span>
+                    <span>Traction</span>
+                    <span>Readiness</span>
+                    <span>Team</span>
+                    <span>Spark</span>
+                    <span>Uploads</span>
+                </div>
+            </div>
+
+            <form id="applicationForm" class="multi-step-form" novalidate>
+                <!-- Step 1: Founder Snapshot -->
+                <div class="form-step active" data-step="1">
+                    <h3 class="step-title">Founder Snapshot</h3>
+                    <p class="step-description">Tell us about yourself</p>
+
+                    <div class="form-group">
+                        <label for="founderName">Founder Name(s) <span class="required">*</span></label>
+                        <input type="text" id="founderName" name="founderName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pronouns">Pronouns <span class="required">*</span></label>
+                        <input type="text" id="pronouns" name="pronouns" placeholder="e.g., she/her, he/him, they/them" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location <span class="required">*</span></label>
+                        <input type="text" id="location" name="location" placeholder="City, State" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Demographics (optional)</label>
+                        <p class="field-hint">Help us understand who we're reaching. Select all that apply.</p>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Black/African American">
+                                <span>Black/African American</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Hispanic/Latino">
+                                <span>Hispanic/Latino</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Asian">
+                                <span>Asian</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Native American">
+                                <span>Native American</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Pacific Islander">
+                                <span>Pacific Islander</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="White">
+                                <span>White</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="LGBTQ+">
+                                <span>LGBTQ+</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Woman">
+                                <span>Woman</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Non-binary">
+                                <span>Non-binary</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Veteran">
+                                <span>Veteran</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Immigrant">
+                                <span>Immigrant</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="demographics" value="Person with Disability">
+                                <span>Person with Disability</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn URL</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram">Instagram URL</label>
+                        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/yourhandle">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Personal Website</label>
+                        <input type="url" id="website" name="website" placeholder="https://yoursite.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">One-Sentence Bio <span class="required">*</span></label>
+                        <textarea id="bio" name="bio" rows="2" placeholder="Who are you in one sentence?" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video Introduction (60-90 seconds) <span class="required">*</span></label>
+                        <p class="field-hint">Introduce yourself and your venture. Be authentic!</p>
+                        <div class="file-upload-zone" data-field="videoIntro">
+                            <div class="upload-icon">📹</div>
+                            <p class="upload-text">Drag & drop your video here or click to browse</p>
+                            <p class="upload-hint">MP4, MOV, or WebM (max 100MB)</p>
+                            <input type="file" id="videoIntro" name="videoIntro" accept="video/*" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="videoIntroUrl" id="videoIntroUrl">
+                    </div>
+                </div>
+
+                <!-- Step 2: Venture Overview -->
+                <div class="form-step" data-step="2">
+                    <h3 class="step-title">Venture Overview</h3>
+                    <p class="step-description">Tell us about what you're building</p>
+
+                    <div class="form-group">
+                        <label for="problem">What problem are you solving and why now? <span class="required">*</span></label>
+                        <textarea id="problem" name="problem" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audience">Who experiences this problem? <span class="required">*</span></label>
+                        <textarea id="audience" name="audience" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="solution">What's your solution? (1-2 sentences) <span class="required">*</span></label>
+                        <textarea id="solution" name="solution" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personalMeaning">Why does this matter to you personally? <span class="required">*</span></label>
+                        <textarea id="personalMeaning" name="personalMeaning" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 3: Market Context -->
+                <div class="form-step" data-step="3">
+                    <h3 class="step-title">Market Context</h3>
+                    <p class="step-description">Help us understand your market</p>
+
+                    <div class="form-group">
+                        <label for="targetCustomer">Describe your target customer <span class="required">*</span></label>
+                        <p class="field-hint">Who are they? What do they care about? Where do they spend time?</p>
+                        <textarea id="targetCustomer" name="targetCustomer" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pricePoint">What's your price point? <span class="required">*</span></label>
+                        <p class="field-hint">How much will customers pay for your product/service?</p>
+                        <input type="text" id="pricePoint" name="pricePoint" placeholder="e.g., $29/month, $199 one-time, Free with premium tier" required>
+                    </div>
+                </div>
+
+                <!-- Step 4: Stage & Traction -->
+                <div class="form-step" data-step="4">
+                    <h3 class="step-title">Stage & Traction</h3>
+                    <p class="step-description">Where are you in your journey?</p>
+
+                    <div class="form-group">
+                        <label for="researchFindings">Share 3 key findings from your customer research <span class="required">*</span></label>
+                        <p class="field-hint">What have you learned from talking to potential customers?</p>
+                        <textarea id="researchFindings" name="researchFindings" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="earlySignups">Any early signups, waitlist, or expressions of interest?</label>
+                        <p class="field-hint">Share numbers, testimonials, or early traction if you have it</p>
+                        <textarea id="earlySignups" name="earlySignups" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prototype or MVP (if available)</label>
+                        <p class="field-hint">Upload screenshots, demo video, or link to your prototype</p>
+                        <div class="file-upload-zone" data-field="prototype">
+                            <div class="upload-icon">📱</div>
+                            <p class="upload-text">Drag & drop your file here or click to browse</p>
+                            <p class="upload-hint">Images, videos, or PDFs (max 50MB)</p>
+                            <input type="file" id="prototype" name="prototype" accept="image/*,video/*,.pdf" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="prototypeUrl" id="prototypeUrl">
+                    </div>
+                </div>
+
+                <!-- Step 5: Founder Readiness -->
+                <div class="form-step" data-step="5">
+                    <h3 class="step-title">Founder Readiness</h3>
+                    <p class="step-description">Let's see if we're a good fit</p>
+
+                    <div class="form-group">
+                        <label for="whyApplying">Why are you applying to this accelerator? <span class="required">*</span></label>
+                        <textarea id="whyApplying" name="whyApplying" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goals">What do you hope to achieve by the end of the program? <span class="required">*</span></label>
+                        <textarea id="goals" name="goals" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="performingExperience">Tell us about your experience with public speaking or performing <span class="required">*</span></label>
+                        <p class="field-hint">This is a pitch competition—we want to know you're ready for the stage!</p>
+                        <textarea id="performingExperience" name="performingExperience" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 6: Team & Commitments -->
+                <div class="form-step" data-step="6">
+                    <h3 class="step-title">Team & Commitments</h3>
+                    <p class="step-description">Who's on this journey with you?</p>
+
+                    <div class="form-group">
+                        <label>Are you building solo or with a team? <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="teamStatus" value="solo" required>
+                                <span>Solo Founder</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="teamStatus" value="team">
+                                <span>I have a team</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group team-roles-group" style="display: none;">
+                        <label for="teamRoles">Describe your team and their roles</label>
+                        <textarea id="teamRoles" name="teamRoles" rows="3" placeholder="Who does what? What are their backgrounds?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label commitment-checkbox">
+                            <input type="checkbox" name="scheduleCommitment" id="scheduleCommitment" required>
+                            <span>I can commit to the accelerator schedule and attend all required sessions <span class="required">*</span></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supportGaps">What support or resources do you most need right now? <span class="required">*</span></label>
+                        <p class="field-hint">Be specific—funding, mentorship, technical help, connections, etc.</p>
+                        <textarea id="supportGaps" name="supportGaps" rows="4" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 7: Show Us Your Spark -->
+                <div class="form-step" data-step="7">
+                    <h3 class="step-title">Show Us Your Spark</h3>
+                    <p class="step-description">Optional: Get creative!</p>
+
+                    <div class="form-group">
+                        <label>Creative Submission (30 seconds max)</label>
+                        <p class="field-hint">
+                            This is your chance to stand out. Submit a short video that shows your personality,
+                            passion, or creativity. Sing, rap, tell a joke, do a demo—whatever represents YOU.
+                            This is optional but encouraged!
+                        </p>
+                        <div class="file-upload-zone" data-field="sparkVideo">
+                            <div class="upload-icon">✨</div>
+                            <p class="upload-text">Drag & drop your creative video here or click to browse</p>
+                            <p class="upload-hint">MP4, MOV, or WebM (max 50MB, 30 seconds)</p>
+                            <input type="file" id="sparkVideo" name="sparkVideo" accept="video/*" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="sparkVideoUrl" id="sparkVideoUrl">
+                    </div>
+                </div>
+
+                <!-- Step 8: Uploads -->
+                <div class="form-step" data-step="8">
+                    <h3 class="step-title">Final Uploads</h3>
+                    <p class="step-description">Almost done! Upload your materials</p>
+
+                    <div class="form-group">
+                        <label>Pitch Deck (if available)</label>
+                        <p class="field-hint">PDF or PowerPoint, 10 slides max recommended</p>
+                        <div class="file-upload-zone" data-field="pitchDeck">
+                            <div class="upload-icon">📊</div>
+                            <p class="upload-text">Drag & drop your pitch deck here or click to browse</p>
+                            <p class="upload-hint">PDF or PPTX (max 25MB)</p>
+                            <input type="file" id="pitchDeck" name="pitchDeck" accept=".pdf,.pptx,.ppt" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="pitchDeckUrl" id="pitchDeckUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Work Samples (optional)</label>
+                        <p class="field-hint">Any additional materials that showcase your work or venture</p>
+                        <div class="file-upload-zone" data-field="workSamples">
+                            <div class="upload-icon">📁</div>
+                            <p class="upload-text">Drag & drop your files here or click to browse</p>
+                            <p class="upload-hint">Images, PDFs, or documents (max 25MB)</p>
+                            <input type="file" id="workSamples" name="workSamples" accept="image/*,.pdf,.doc,.docx" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="workSamplesUrl" id="workSamplesUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Professional Headshot <span class="required">*</span></label>
+                        <p class="field-hint">A clear photo of you for promotional materials if selected</p>
+                        <div class="file-upload-zone" data-field="headshot">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-text">Drag & drop your headshot here or click to browse</p>
+                            <p class="upload-hint">JPG or PNG (max 10MB)</p>
+                            <input type="file" id="headshot" name="headshot" accept="image/*" class="file-input">
+                            <div class="upload-preview"></div>
+                        </div>
+                        <input type="hidden" name="headshotUrl" id="headshotUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <p class="field-hint">We'll use this to contact you about your application</p>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="termsAgreed" id="termsAgreed" required>
+                            <span>I agree to allow my submission materials to be used for promotional purposes if selected <span class="required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Form Navigation -->
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
+                        ← Previous
+                    </button>
+                    <button type="button" class="btn btn-primary" id="nextBtn">
+                        Next →
+                    </button>
+                    <button type="submit" class="btn btn-submit" id="submitBtn" style="display: none;">
+                        Submit Application
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <div class="success-icon">🎉</div>
+                <h3>Application Submitted!</h3>
+                <p>Thank you for applying to the APP Accelerator. We've received your application and will be in touch soon.</p>
+                <p>Keep an eye on your inbox for updates!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer hidden">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>CO-FOUNDERS</h3>
+                    <p>All People Powered Accelerator</p>
+                </div>
+                <div class="footer-contact">
+                    <p>Questions? Reach out:</p>
+                    <a href="mailto:hello@cofounders.com">hello@cofounders.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Co-Founders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
