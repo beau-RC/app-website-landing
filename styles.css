@@ -336,6 +336,62 @@ a:hover {
     background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-light) 100%);
 }
 
+/* Collapsible Toggle Button */
+.apply-toggle {
+    width: 100%;
+    padding: 20px 32px;
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 0;
+}
+
+.apply-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
+}
+
+.apply-toggle .toggle-text {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-white);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.apply-toggle .toggle-icon {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    transition: transform var(--transition);
+    line-height: 1;
+}
+
+.apply-toggle.expanded .toggle-icon {
+    transform: rotate(45deg);
+}
+
+/* Application Content (Collapsible) */
+.application-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin-top: 0;
+}
+
+.application-content.expanded {
+    max-height: 5000px;
+    opacity: 1;
+    margin-top: 24px;
+}
+
 /* Progress Indicator */
 .progress-container {
     margin-bottom: 40px;
@@ -352,7 +408,7 @@ a:hover {
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--color-teal) 0%, var(--color-gold) 100%);
-    width: 12.5%;
+    width: 33.33%;
     transition: width var(--transition);
     border-radius: 3px;
 }

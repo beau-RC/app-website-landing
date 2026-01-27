@@ -20,7 +20,7 @@ const CONFIG = {
     STORAGE_KEY: 'app_accelerator_form_data',
 
     // Total number of steps
-    TOTAL_STEPS: 8
+    TOTAL_STEPS: 3
 };
 
 // ================================
@@ -41,12 +41,19 @@ const progressFill = document.getElementById('progressFill');
 const successMessage = document.getElementById('successMessage');
 
 // ================================
+// DOM Elements (Toggle)
+// ================================
+const applyToggle = document.getElementById('applyToggle');
+const applicationContent = document.getElementById('applicationContent');
+
+// ================================
 // Initialization
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
     loadSavedData();
     initializeFileUploads();
     initializeTeamToggle();
+    initializeApplyToggle();
     updateUI();
 
     // Event listeners
@@ -58,6 +65,37 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('input', debounce(saveFormData, 500));
     form.addEventListener('change', debounce(saveFormData, 500));
 });
+
+// ================================
+// Apply Toggle (Collapsible)
+// ================================
+function initializeApplyToggle() {
+    applyToggle.addEventListener('click', toggleApplication);
+
+    // Check if there's saved data - if so, expand the form
+    const saved = localStorage.getItem(CONFIG.STORAGE_KEY);
+    if (saved) {
+        expandApplication();
+    }
+}
+
+function toggleApplication() {
+    if (applicationContent.classList.contains('expanded')) {
+        collapseApplication();
+    } else {
+        expandApplication();
+    }
+}
+
+function expandApplication() {
+    applicationContent.classList.add('expanded');
+    applyToggle.classList.add('expanded');
+}
+
+function collapseApplication() {
+    applicationContent.classList.remove('expanded');
+    applyToggle.classList.remove('expanded');
+}
 
 // ================================
 // Navigation Functions
@@ -98,11 +136,19 @@ function scrollToTop() {
 // UI Updates
 // ================================
 function updateUI() {
+    // Ensure currentStep is valid
+    if (currentStep < 1 || currentStep > CONFIG.TOTAL_STEPS) {
+        currentStep = 1;
+    }
+
     // Update form steps visibility
     document.querySelectorAll('.form-step').forEach(step => {
         step.classList.remove('active');
     });
-    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+    const activeStep = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+    if (activeStep) {
+        activeStep.classList.add('active');
+    }
 
     // Update progress bar
     const progress = (currentStep / CONFIG.TOTAL_STEPS) * 100;
@@ -150,17 +196,15 @@ function validateCurrentStep() {
         }
     });
 
-    // Special validation for file uploads on specific steps
-    if (currentStep === 1) {
+    // Special validation for file uploads on Step 3 (Uploads)
+    if (currentStep === 3) {
         const videoIntroUrl = document.getElementById('videoIntroUrl').value;
         const videoIntroInput = document.getElementById('videoIntro');
         if (!videoIntroUrl && !videoIntroInput.files.length) {
             showFieldError(videoIntroInput.closest('.file-upload-zone'), 'Video introduction is required');
             isValid = false;
         }
-    }
 
-    if (currentStep === 8) {
         const headshotUrl = document.getElementById('headshotUrl').value;
         const headshotInput = document.getElementById('headshot');
         if (!headshotUrl && !headshotInput.files.length) {
@@ -399,9 +443,9 @@ function loadSavedData() {
             }
         });
 
-        // Restore current step
+        // Restore current step (cap to valid range)
         if (data._currentStep) {
-            currentStep = data._currentStep;
+            currentStep = Math.min(data._currentStep, CONFIG.TOTAL_STEPS);
         }
 
         // Show saved file names (user will need to re-upload)
@@ -511,7 +555,7 @@ function collectFormData() {
     }
 
     // Add file URLs
-    const fileFields = ['videoIntro', 'prototype', 'sparkVideo', 'pitchDeck', 'workSamples', 'headshot'];
+    const fileFields = ['videoIntro', 'pitchDeck', 'headshot'];
     fileFields.forEach(field => {
         const urlInput = document.getElementById(`${field}Url`);
         if (urlInput && urlInput.value) {
@@ -532,7 +576,7 @@ async function uploadFilesToDrive() {
         return;
     }
 
-    const fileFields = ['videoIntro', 'prototype', 'sparkVideo', 'pitchDeck', 'workSamples', 'headshot'];
+    const fileFields = ['videoIntro', 'pitchDeck', 'headshot'];
 
     for (const fieldName of fileFields) {
         if (uploadedFiles[fieldName]) {
@@ -656,7 +700,9 @@ async function submitToGoogleSheets(data) {
 function showSuccess() {
     form.style.display = 'none';
     document.querySelector('.progress-container').style.display = 'none';
+    applyToggle.style.display = 'none';
     successMessage.style.display = 'block';
+    applicationContent.classList.add('expanded');
     scrollToTop();
 }
 
