@@ -47,13 +47,51 @@ const applyToggle = document.getElementById('applyToggle');
 const applicationContent = document.getElementById('applicationContent');
 
 // ================================
+// Password Protection
+// ================================
+const SITE_PASSWORD = 'buildwithme';
+const PASSWORD_STORAGE_KEY = 'app_site_authenticated';
+
+function initializePasswordGate() {
+    const gate = document.getElementById('passwordGate');
+    const form = document.getElementById('passwordForm');
+    const input = document.getElementById('passwordInput');
+    const error = document.getElementById('passwordError');
+
+    // Check if already authenticated this session
+    if (sessionStorage.getItem(PASSWORD_STORAGE_KEY) === 'true') {
+        gate.classList.add('hidden');
+        return;
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (input.value === SITE_PASSWORD) {
+            sessionStorage.setItem(PASSWORD_STORAGE_KEY, 'true');
+            gate.classList.add('hidden');
+        } else {
+            error.textContent = 'Incorrect password';
+            input.value = '';
+            input.focus();
+        }
+    });
+
+    // Focus input on load
+    input.focus();
+}
+
+// ================================
 // Initialization
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
+    initializePasswordGate();
     loadSavedData();
     initializeFileUploads();
     initializeTeamToggle();
     initializeApplyToggle();
+    initializeFAQ();
     updateUI();
 
     // Event listeners
@@ -95,6 +133,22 @@ function expandApplication() {
 function collapseApplication() {
     applicationContent.classList.remove('expanded');
     applyToggle.classList.remove('expanded');
+}
+
+// ================================
+// FAQ Toggle
+// ================================
+function initializeFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+
+        question.addEventListener('click', () => {
+            // Toggle the clicked item
+            item.classList.toggle('expanded');
+        });
+    });
 }
 
 // ================================

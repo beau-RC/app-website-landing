@@ -10,6 +10,19 @@
     <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
+    <!-- Password Gate -->
+    <div id="passwordGate" class="password-gate">
+        <div class="password-modal">
+            <h2>Stealth for now</h2>
+            <p>Enter password to view this site</p>
+            <form id="passwordForm">
+                <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+                <button type="submit">Enter</button>
+            </form>
+            <p id="passwordError" class="password-error"></p>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-container">
@@ -327,21 +340,125 @@
         </div>
     </section>
 
+    <!-- About Co-Founders Section -->
+    <section class="about-cofounders">
+        <div class="container">
+            <h2 class="section-title">About Co-Founders</h2>
+            <p class="about-text">
+                Co-Founders is the hit Bay Area Musical about an underrated coder from Oakland who hacks her way into the most competitive startup accelerator in Silicon Valley. It sold out its entire 6 week world premiere of 40 performances at the American Conservatory Theater (A.C.T.) in 2025, with over 10,000 tickets, making it one of the highest demanded shows in SF theater history.
+            </p>
+            <a href="https://www.cofoundersthemusical.com" class="btn btn-primary" target="_blank">
+                Learn More
+            </a>
+        </div>
+    </section>
+
+    <!-- Judges Section -->
+    <section class="judges">
+        <div class="container">
+            <h2 class="section-title">Meet the Judges</h2>
+            <div class="judges-grid">
+                <div class="judge-card">
+                    <img src="assets/judge-stephen.jpg" alt="Stephen Deberry" class="judge-photo">
+                    <h3 class="judge-name">Stephen Deberry</h3>
+                    <p class="judge-bio">Founder of BRONZE, a leading US venture capital fund that invests to move social, economic, and environmental disparity to prosperity, profitably.</p>
+                    <a href="https://www.linkedin.com/in/stephendeberry/" class="judge-link" target="_blank">LinkedIn</a>
+                </div>
+                <div class="judge-card">
+                    <img src="assets/judge-sonja.png" alt="Sonja Perkins" class="judge-photo">
+                    <h3 class="judge-name">Sonja Perkins</h3>
+                    <p class="judge-bio">Founder of the Perkins Fund, Co-Founder of Broadway Angels, former partner at Menlo Ventures. A leading investor in technology and people.</p>
+                    <a href="https://www.linkedin.com/in/sonjahoelperkins/" class="judge-link" target="_blank">LinkedIn</a>
+                </div>
+                <div class="judge-card">
+                    <img src="assets/judge-larussell.png" alt="LaRussell" class="judge-photo">
+                    <h3 class="judge-name">LaRussell</h3>
+                    <p class="judge-bio">Vallejo rapper and entrepreneur - music pioneer of offer-based models, artist owned venues, fan ownership, with radical transparency and community inclusion.</p>
+                    <a href="https://www.instagram.com/larussell/?hl=en" class="judge-link" target="_blank">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who can apply?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Early-stage founders with a venture idea, based in or connected to the Bay Area.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is the time commitment?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>If selected, you must attend 3 mentorship workshops in Oakland, rehearsals at the venue, and pitch at the live event on April 11th.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need a finished product?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, we welcome ideas at all stages. What matters is your vision and commitment.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is there a cost to participate?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No, participation in the accelerator and pitch competition is free.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What do winners receive?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Prizes include mentorship, exposure to investors, and cash awards (details TBA).</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When will I hear back about my application?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Applicants will be notified within 2 weeks of the application deadline.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="footer hidden">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>CO-FOUNDERS</h3>
-                    <p>All People Powered Accelerator</p>
+                    <p>The Musical</p>
                 </div>
-                <div class="footer-contact">
-                    <p>Questions? Reach out:</p>
-                    <a href="mailto:hello@cofounders.com">hello@cofounders.com</a>
+                <div class="footer-links">
+                    <a href="mailto:holler@rhymecombinator.com">holler@rhymecombinator.com</a>
+                    <a href="https://instagram.com/cofoundersthemusical" target="_blank">@cofoundersthemusical</a>
+                    <a href="https://www.cofoundersthemusical.com" target="_blank">www.cofoundersthemusical.com</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Co-Founders. All rights reserved.</p>
+                <p>&copy; 2026 Rhyme Combinator. All rights reserved.</p>
             </div>
         </div>
     </footer>
