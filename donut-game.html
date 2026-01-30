@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donut Swipe Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="donut-game.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <h1>🍩 Donut Dash 🍩</h1>
+            <p class="instructions">Swipe <span class="left">← LEFT</span> to toss • Swipe <span class="right">RIGHT →</span> to eat</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+                <span class="progress-text" id="progressText">0 / 6 donuts eaten</span>
+            </div>
+        </header>
+
+        <!-- Card Stack Area -->
+        <div class="card-stack" id="cardStack">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Swipe Indicators -->
+        <div class="swipe-indicator left" id="tossIndicator">
+            <span>🗑️ TOSS</span>
+        </div>
+        <div class="swipe-indicator right" id="eatIndicator">
+            <span>😋 EAT</span>
+        </div>
+
+        <!-- Action Buttons (for non-touch devices) -->
+        <div class="action-buttons">
+            <button class="btn-toss" id="btnToss">
+                <span>👎</span>
+                <span>Toss</span>
+            </button>
+            <button class="btn-eat" id="btnEat">
+                <span>👍</span>
+                <span>Eat</span>
+            </button>
+        </div>
+
+        <!-- Donut Box Modal -->
+        <div class="donut-box-overlay" id="donutBoxOverlay">
+            <div class="celebration-container">
+                <div class="confetti-container" id="confettiContainer"></div>
+
+                <h2 class="celebration-title" id="celebrationTitle">🎉 Delicious! 🎉</h2>
+
+                <div class="donut-box" id="donutBox">
+                    <div class="box-lid" id="boxLid">
+                        <div class="box-lid-top"></div>
+                        <div class="box-lid-front">DONUTS</div>
+                    </div>
+                    <div class="box-base">
+                        <div class="donuts-in-box" id="donutsInBox">
+                            <!-- Collected donuts will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <p class="celebration-message" id="celebrationMessage">You collected 6 delicious donuts!</p>
+
+                <button class="btn-play-again" id="btnPlayAgain">
+                    🍩 Play Again
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState">
+            <p>No more donuts!</p>
+            <button class="btn-reload" id="btnReload">🍩 Load More Donuts</button>
+        </div>
+    </div>
+
+    <script src="donut-game.js"></script>
+</body>
+</html>
