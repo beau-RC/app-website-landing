@@ -852,6 +852,10 @@ textarea.error {
     display: inline-block;
 }
 
+.about-cofounders.bg-gray {
+    background: linear-gradient(180deg, var(--color-gray-light) 0%, var(--color-white) 100%);
+}
+
 /* ================================
    Judges Section
    ================================ */
@@ -1109,6 +1113,11 @@ textarea.error {
 
 .footer-brand p {
     color: var(--color-gray);
+}
+
+.footer-logo {
+    max-width: 200px;
+    height: auto;
 }
 
 .footer-links {
