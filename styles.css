@@ -932,6 +932,67 @@ textarea.error {
     color: var(--color-gold);
 }
 
+/* Mystery Mode Toggle Styles */
+
+/* Mystery mode - hide revealed content, show mystery content */
+.judges.mystery-mode .judge-photo,
+.judges.mystery-mode .judge-name,
+.judges.mystery-mode .judge-bio,
+.judges.mystery-mode .judge-link {
+    display: none;
+}
+
+.judges.mystery-mode .judge-photo-mystery,
+.judges.mystery-mode .judge-name-mystery,
+.judges.mystery-mode .judge-bio-mystery {
+    display: block;
+}
+
+/* Revealed mode (default) - show revealed, hide mystery */
+.judges .judge-photo-mystery,
+.judges .judge-name-mystery,
+.judges .judge-bio-mystery {
+    display: none;
+}
+
+/* Silhouette styling */
+.judge-photo-mystery {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 4px solid var(--color-teal);
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+/* Question mark mystery icon */
+.judge-photo-mystery::after {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: var(--color-teal);
+    font-weight: bold;
+}
+
+/* Style mystery names and bios same as regular ones */
+.judge-name-mystery {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-teal);
+    margin-bottom: 12px;
+}
+
+.judge-bio-mystery {
+    font-size: 0.95rem;
+    color: var(--color-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
 /* ================================
    FAQ Section
    ================================ */
