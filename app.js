@@ -78,6 +78,23 @@ function initializeApplyToggle() {
     if (saved) {
         expandApplication();
     }
+
+    // Make hero CTA buttons scroll AND open the form
+    const heroCTAs = document.querySelectorAll('a.btn-pitch-cta[href="#application"]');
+    heroCTAs.forEach(cta => {
+        cta.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Scroll to the application section
+            const target = document.getElementById('application');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Expand the form after a short delay (to let scroll start)
+            setTimeout(() => {
+                expandApplication();
+            }, 300);
+        });
+    });
 }
 
 function toggleApplication() {
