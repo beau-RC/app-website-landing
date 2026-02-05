@@ -84,17 +84,29 @@ function initializeApplyToggle() {
     heroCTAs.forEach(cta => {
         cta.addEventListener('click', (e) => {
             e.preventDefault();
-            // Scroll to the application section
-            const target = document.getElementById('application');
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-            // Expand the form after a short delay (to let scroll start)
-            setTimeout(() => {
-                expandApplication();
-            }, 300);
+            scrollToAndOpenForm();
         });
     });
+
+    // Make benefit cards scroll AND open the form
+    const benefitCards = document.querySelectorAll('.benefit-card');
+    benefitCards.forEach(card => {
+        card.addEventListener('click', () => {
+            scrollToAndOpenForm();
+        });
+    });
+}
+
+function scrollToAndOpenForm() {
+    // Scroll to the application section
+    const target = document.getElementById('application');
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
+    // Expand the form after a short delay (to let scroll start)
+    setTimeout(() => {
+        expandApplication();
+    }, 300);
 }
 
 function toggleApplication() {

@@ -1000,6 +1000,7 @@ textarea.error {
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition), box-shadow var(--transition);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
 }
 
 .benefit-card:hover {
