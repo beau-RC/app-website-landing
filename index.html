@@ -146,6 +146,14 @@
 
                 <!-- Application Content (initially hidden) -->
                 <div class="application-content" id="applicationContent">
+                    <!-- Draft Restoration Banner -->
+                    <div class="draft-restored-banner" id="draftRestoredBanner" style="display: none;">
+                        <div class="draft-restored-content">
+                            <span class="draft-restored-text">Your saved draft has been restored. Continue where you left off!</span>
+                            <button class="draft-restored-dismiss" id="draftDismissBanner">&times;</button>
+                        </div>
+                    </div>
+
                     <!-- Progress Indicator -->
                     <div class="progress-container">
                         <div class="progress-bar">
@@ -368,6 +376,9 @@
                             <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
                                 ← Previous
                             </button>
+                            <button type="button" class="btn btn-draft" id="saveDraftBtn">
+                                Save Draft
+                            </button>
                             <button type="button" class="btn btn-primary" id="nextBtn">
                                 Next →
                             </button>
@@ -376,6 +387,36 @@
                             </button>
                         </div>
                     </form>
+
+                    <!-- Save Draft Modal -->
+                    <div class="draft-modal-overlay" id="draftModal" style="display: none;">
+                        <div class="draft-modal">
+                            <button class="draft-modal-close" id="draftModalClose">&times;</button>
+
+                            <!-- Default State -->
+                            <div class="draft-modal-form" id="draftModalForm">
+                                <h3 class="draft-modal-title">Save Your Draft</h3>
+                                <p class="draft-modal-text">Enter your email to receive a link to continue your application later.</p>
+                                <div class="form-group">
+                                    <input type="email" id="draftEmail" class="draft-email-input"
+                                           placeholder="your@email.com">
+                                    <div class="draft-error" id="draftError" style="display: none;"></div>
+                                </div>
+                                <div class="draft-modal-actions">
+                                    <button type="button" class="btn btn-secondary" id="draftCancelBtn">Cancel</button>
+                                    <button type="button" class="btn btn-submit" id="draftConfirmBtn">Save & Send Link</button>
+                                </div>
+                            </div>
+
+                            <!-- Success State -->
+                            <div class="draft-modal-success" id="draftModalSuccess" style="display: none;">
+                                <div class="draft-success-icon">&#10003;</div>
+                                <h3 class="draft-modal-title">Draft Saved!</h3>
+                                <p class="draft-modal-text">Check your email for a link to resume your application. The link expires in 30 days.</p>
+                                <button type="button" class="btn btn-primary" id="draftCloseBtn">Close</button>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Success Message -->
                     <div id="successMessage" class="success-message" style="display: none;">

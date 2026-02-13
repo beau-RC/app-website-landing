@@ -39,6 +39,7 @@ const nextBtn = document.getElementById('nextBtn');
 const submitBtn = document.getElementById('submitBtn');
 const progressFill = document.getElementById('progressFill');
 const successMessage = document.getElementById('successMessage');
+const saveDraftBtn = document.getElementById('saveDraftBtn');
 
 // ================================
 // DOM Elements (Toggle)
@@ -56,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeApplyToggle();
     initializeFAQ();
     updateUI();
+    initializeDraftFeature();
+    checkForDraftRestore();
 
     // Event listeners
     prevBtn.addEventListener('click', goToPrevStep);
@@ -765,4 +768,273 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+
+// ================================
+// Save Draft Feature
+// ================================
+function initializeDraftFeature() {
+    const draftModal = document.getElementById('draftModal');
+    const draftModalClose = document.getElementById('draftModalClose');
+    const draftCancelBtn = document.getElementById('draftCancelBtn');
+    const draftCloseBtn = document.getElementById('draftCloseBtn');
+    const draftConfirmBtn = document.getElementById('draftConfirmBtn');
+    const draftEmailInput = document.getElementById('draftEmail');
+    const draftDismissBanner = document.getElementById('draftDismissBanner');
+
+    // Save Draft button opens modal
+    saveDraftBtn.addEventListener('click', openDraftModal);
+
+    // Modal close handlers
+    draftModalClose.addEventListener('click', closeDraftModal);
+    draftCancelBtn.addEventListener('click', closeDraftModal);
+    draftCloseBtn.addEventListener('click', closeDraftModal);
+
+    // Close on overlay click
+    draftModal.addEventListener('click', (e) => {
+        if (e.target === draftModal) closeDraftModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && draftModal.style.display !== 'none') {
+            closeDraftModal();
+        }
+    });
+
+    // Confirm save
+    draftConfirmBtn.addEventListener('click', handleSaveDraft);
+
+    // Allow Enter key in email input to confirm
+    draftEmailInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSaveDraft();
+        }
+    });
+
+    // Dismiss restored banner
+    if (draftDismissBanner) {
+        draftDismissBanner.addEventListener('click', () => {
+            document.getElementById('draftRestoredBanner').style.display = 'none';
+        });
+    }
+}
+
+function openDraftModal() {
+    const draftModal = document.getElementById('draftModal');
+    const draftModalForm = document.getElementById('draftModalForm');
+    const draftModalSuccess = document.getElementById('draftModalSuccess');
+    const draftError = document.getElementById('draftError');
+    const draftConfirmBtn = document.getElementById('draftConfirmBtn');
+    const draftEmailInput = document.getElementById('draftEmail');
+
+    // Pre-fill email if user already entered it on step 1
+    const emailField = document.getElementById('email');
+    if (emailField && emailField.value) {
+        draftEmailInput.value = emailField.value;
+    }
+
+    // Reset modal to form state
+    draftModalForm.style.display = 'block';
+    draftModalSuccess.style.display = 'none';
+    draftError.style.display = 'none';
+    draftConfirmBtn.disabled = false;
+    draftConfirmBtn.textContent = 'Save & Send Link';
+
+    // Show modal
+    draftModal.style.display = 'flex';
+
+    // Focus email input
+    setTimeout(() => draftEmailInput.focus(), 100);
+}
+
+function closeDraftModal() {
+    document.getElementById('draftModal').style.display = 'none';
+}
+
+async function handleSaveDraft() {
+    const draftEmailInput = document.getElementById('draftEmail');
+    const draftError = document.getElementById('draftError');
+    const draftConfirmBtn = document.getElementById('draftConfirmBtn');
+    const draftModalForm = document.getElementById('draftModalForm');
+    const draftModalSuccess = document.getElementById('draftModalSuccess');
+
+    const email = draftEmailInput.value.trim();
+
+    // Validate email
+    if (!email) {
+        showDraftError('Please enter your email address.');
+        return;
+    }
+    if (!isValidEmail(email)) {
+        showDraftError('Please enter a valid email address.');
+        return;
+    }
+
+    // Show loading state
+    draftConfirmBtn.disabled = true;
+    draftConfirmBtn.textContent = 'Saving...';
+    draftError.style.display = 'none';
+
+    try {
+        // Gather all current form data
+        const currentFormData = {};
+        const formDataObj = new FormData(form);
+
+        formDataObj.forEach((value, key) => {
+            if (currentFormData[key]) {
+                if (!Array.isArray(currentFormData[key])) {
+                    currentFormData[key] = [currentFormData[key]];
+                }
+                currentFormData[key].push(value);
+            } else {
+                currentFormData[key] = value;
+            }
+        });
+
+        // Collect file URLs if any files have already been uploaded
+        const fileUrls = {};
+        ['videoIntro', 'pitchDeck', 'headshot'].forEach(field => {
+            const urlInput = document.getElementById(field + 'Url');
+            if (urlInput && urlInput.value) {
+                fileUrls[field] = urlInput.value;
+            }
+        });
+
+        // Also save file names for display on restore
+        const fileNames = {};
+        Object.keys(uploadedFiles).forEach(key => {
+            fileNames[key] = uploadedFiles[key].name;
+        });
+        currentFormData._uploadedFileNames = fileNames;
+
+        // Build the payload
+        const payload = {
+            email: email,
+            formData: currentFormData,
+            currentStep: currentStep,
+            fileUrls: fileUrls
+        };
+
+        // Send to backend
+        const postData = new FormData();
+        postData.append('data', JSON.stringify(payload));
+
+        const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL + '?action=saveDraft', {
+            method: 'POST',
+            body: postData
+        });
+
+        const responseText = await response.text();
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            throw new Error('Invalid response from server');
+        }
+
+        if (!result.success) {
+            throw new Error(result.error || 'Failed to save draft');
+        }
+
+        // Show success state
+        draftModalForm.style.display = 'none';
+        draftModalSuccess.style.display = 'block';
+
+    } catch (error) {
+        console.error('Error saving draft:', error);
+        showDraftError('Something went wrong. Please try again.');
+        draftConfirmBtn.disabled = false;
+        draftConfirmBtn.textContent = 'Save & Send Link';
+    }
+}
+
+function showDraftError(message) {
+    const draftError = document.getElementById('draftError');
+    draftError.textContent = message;
+    draftError.style.display = 'block';
+}
+
+// ================================
+// Draft Restoration (from email link)
+// ================================
+async function checkForDraftRestore() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const draftId = urlParams.get('draft');
+
+    if (!draftId) return;
+
+    try {
+        // Fetch draft data from backend
+        const response = await fetch(
+            CONFIG.GOOGLE_SCRIPT_URL + '?action=loadDraft&draftId=' + encodeURIComponent(draftId)
+        );
+
+        const responseText = await response.text();
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (e) {
+            console.error('Could not parse draft response');
+            return;
+        }
+
+        if (!result.success) {
+            alert(result.error || 'Could not load your saved draft.');
+            window.history.replaceState({}, '', window.location.pathname);
+            return;
+        }
+
+        // Merge file URLs into form data for restoration
+        const draftFormData = result.formData || {};
+        const fileUrls = result.fileUrls || {};
+
+        // Preserve current step
+        draftFormData._currentStep = result.currentStep || 1;
+
+        // Save to localStorage so existing loadSavedData() handles restoration
+        localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(draftFormData));
+
+        // Reload saved data using the existing function
+        loadSavedData();
+
+        // Restore file URL hidden inputs (loadSavedData skips hidden inputs)
+        Object.keys(fileUrls).forEach(field => {
+            const urlInput = document.getElementById(field + 'Url');
+            if (urlInput) {
+                urlInput.value = fileUrls[field];
+                // Update the upload zone to show "already uploaded"
+                const zone = document.querySelector('.file-upload-zone[data-field="' + field + '"]');
+                if (zone) {
+                    const preview = zone.querySelector('.upload-preview');
+                    zone.classList.add('has-file');
+                    if (preview) {
+                        preview.innerHTML =
+                            '<div class="file-name">' +
+                            '<span>Previously uploaded (ready)</span>' +
+                            '</div>';
+                    }
+                }
+            }
+        });
+
+        // Update UI to correct step
+        updateUI();
+
+        // Expand the application form
+        expandApplication();
+
+        // Show the restored banner
+        document.getElementById('draftRestoredBanner').style.display = 'block';
+
+        // Scroll to the form
+        setTimeout(() => scrollToAndOpenForm(), 300);
+
+        // Clean up the URL (remove ?draft= parameter)
+        window.history.replaceState({}, '', window.location.pathname);
+
+    } catch (error) {
+        console.error('Error loading draft:', error);
+    }
 }

@@ -7,12 +7,18 @@
 // Configuration - UPDATE THESE
 const SHEET_ID = '1cTa7P3AwABBjoVsgta0GWCKLMV8B-_Dfe2hU3FimtJ8';
 const SHEET_NAME = 'Applications';
+const DRAFTS_SHEET_NAME = 'Drafts';
 const UPLOAD_FOLDER_ID = '1I-hqlurRET1Z0-c-aNiaVTZg5B6DvOL5';
+const SITE_URL = 'https://www.allpeoplepower.com';
 
 /**
- * Handle GET requests (for testing)
+ * Handle GET requests (testing + draft loading)
  */
 function doGet(e) {
+  if (e.parameter && e.parameter.action === 'loadDraft') {
+    return handleLoadDraft(e.parameter.draftId);
+  }
+
   return ContentService.createTextOutput(JSON.stringify({
     status: 'ok',
     message: 'APP Accelerator API is running'
@@ -40,6 +46,11 @@ function doPost(e) {
     // Check if this is a file upload request
     if (e.parameter && e.parameter.action === 'upload') {
       return handleFileUpload(data);
+    }
+
+    // Check if this is a save draft request
+    if (e.parameter && e.parameter.action === 'saveDraft') {
+      return handleSaveDraft(data);
     }
 
     // Otherwise, handle form submission
@@ -190,6 +201,7 @@ This is an automated confirmation email. Please do not reply directly to this me
 
     MailApp.sendEmail({
       to: data.email,
+      from: 'holler@rhymecombinator.com',
       subject: subject,
       body: body
     });
@@ -207,6 +219,148 @@ function createJsonResponse(data) {
   const output = ContentService.createTextOutput(JSON.stringify(data));
   output.setMimeType(ContentService.MimeType.JSON);
   return output;
+}
+
+/**
+ * Handle saving a draft application
+ */
+function handleSaveDraft(data) {
+  try {
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var draftsSheet = ss.getSheetByName(DRAFTS_SHEET_NAME);
+
+    if (!draftsSheet) {
+      draftsSheet = ss.insertSheet(DRAFTS_SHEET_NAME);
+      draftsSheet.getRange(1, 1, 1, 7).setValues([[
+        'Draft ID', 'Email', 'Created At', 'Expires At',
+        'Form Data', 'Current Step', 'File URLs'
+      ]]);
+      draftsSheet.getRange(1, 1, 1, 7).setFontWeight('bold');
+      draftsSheet.setFrozenRows(1);
+    }
+
+    var draftId = Utilities.getUuid();
+    var now = new Date();
+    var expiresAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    var row = [
+      draftId,
+      data.email,
+      now.toISOString(),
+      expiresAt.toISOString(),
+      JSON.stringify(data.formData),
+      data.currentStep || 1,
+      JSON.stringify(data.fileUrls || {})
+    ];
+
+    draftsSheet.appendRow(row);
+
+    sendDraftEmail(data.email, draftId, (data.formData && data.formData.founderName) || 'Applicant');
+
+    return createJsonResponse({
+      success: true,
+      draftId: draftId
+    });
+
+  } catch (error) {
+    console.error('Error in handleSaveDraft:', error);
+    return createJsonResponse({
+      success: false,
+      error: error.toString()
+    });
+  }
+}
+
+/**
+ * Handle loading a saved draft
+ */
+function handleLoadDraft(draftId) {
+  try {
+    if (!draftId) {
+      return createJsonResponse({ success: false, error: 'No draft ID provided' });
+    }
+
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var draftsSheet = ss.getSheetByName(DRAFTS_SHEET_NAME);
+
+    if (!draftsSheet) {
+      return createJsonResponse({ success: false, error: 'Draft not found' });
+    }
+
+    var data = draftsSheet.getDataRange().getValues();
+
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][0] === draftId) {
+        var expiresAt = new Date(data[i][3]);
+        if (expiresAt < new Date()) {
+          return createJsonResponse({
+            success: false,
+            error: 'This draft has expired. Please start a new application.'
+          });
+        }
+
+        return createJsonResponse({
+          success: true,
+          email: data[i][1],
+          formData: JSON.parse(data[i][4]),
+          currentStep: data[i][5],
+          fileUrls: JSON.parse(data[i][6] || '{}')
+        });
+      }
+    }
+
+    return createJsonResponse({ success: false, error: 'Draft not found' });
+
+  } catch (error) {
+    console.error('Error in handleLoadDraft:', error);
+    return createJsonResponse({ success: false, error: error.toString() });
+  }
+}
+
+/**
+ * Send draft resume email with magic link
+ */
+function sendDraftEmail(email, draftId, founderName) {
+  try {
+    var resumeLink = SITE_URL + '?draft=' + draftId;
+
+    var subject = 'APP Accelerator - Your Draft Application';
+    var body = 'Hi ' + founderName + ',\n\n' +
+      'Your draft application for the All People Powered (APP) Accelerator has been saved.\n\n' +
+      'Click the link below to continue where you left off:\n' +
+      resumeLink + '\n\n' +
+      'This link will expire in 30 days.\n\n' +
+      'If you did not request this, you can safely ignore this email.\n\n' +
+      'Best,\nThe Co-Founders Team';
+
+    MailApp.sendEmail({
+      to: email,
+      from: 'holler@rhymecombinator.com',
+      subject: subject,
+      body: body
+    });
+  } catch (error) {
+    console.error('Error sending draft email:', error);
+  }
+}
+
+/**
+ * Initialize the Drafts sheet (run once)
+ */
+function initializeDraftsSheet() {
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  var sheet = ss.getSheetByName(DRAFTS_SHEET_NAME);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(DRAFTS_SHEET_NAME);
+    sheet.getRange(1, 1, 1, 7).setValues([[
+      'Draft ID', 'Email', 'Created At', 'Expires At',
+      'Form Data', 'Current Step', 'File URLs'
+    ]]);
+    sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+    console.log('Drafts sheet initialized');
+  }
 }
 
 /**

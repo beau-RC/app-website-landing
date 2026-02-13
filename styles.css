@@ -758,9 +758,12 @@ textarea.error {
 .form-navigation {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 12px;
     margin-top: 32px;
     padding-top: 24px;
     border-top: 1px solid #E0E0E0;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -1458,5 +1461,208 @@ textarea.error {
     .checkbox-group,
     .radio-group {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   Save Draft Button
+   ================================ */
+.btn-draft {
+    background: transparent;
+    color: var(--color-teal);
+    border: 2px solid var(--color-teal);
+    padding: 12px 24px;
+    font-size: 0.9rem;
+}
+
+.btn-draft:hover {
+    background: rgba(91, 191, 186, 0.1);
+    border-color: var(--color-teal-light);
+    color: var(--color-teal-light);
+    transform: translateY(-2px);
+}
+
+/* ================================
+   Save Draft Modal
+   ================================ */
+.draft-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: draftFadeIn 0.2s ease;
+}
+
+@keyframes draftFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes draftSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.draft-modal {
+    background: var(--color-white);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    max-width: 440px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    animation: draftSlideUp 0.3s ease;
+}
+
+.draft-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-gray);
+    line-height: 1;
+}
+
+.draft-modal-close:hover {
+    color: var(--color-dark);
+}
+
+.draft-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-teal);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.draft-modal-text {
+    color: var(--color-gray);
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.draft-email-input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #E0E0E0;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-align: center;
+    transition: border-color var(--transition);
+    box-sizing: border-box;
+}
+
+.draft-email-input:focus {
+    outline: none;
+    border-color: var(--color-teal);
+    box-shadow: 0 0 0 3px rgba(91, 191, 186, 0.2);
+}
+
+.draft-error {
+    color: var(--color-error);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.draft-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.draft-modal-actions .btn {
+    flex: 1;
+    text-align: center;
+}
+
+/* Draft Success State */
+.draft-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    background: var(--color-success);
+    color: var(--color-white);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.draft-modal-success .draft-modal-text {
+    margin-bottom: 20px;
+}
+
+.draft-modal-success .btn {
+    display: block;
+    width: 100%;
+}
+
+/* ================================
+   Draft Restored Banner
+   ================================ */
+.draft-restored-banner {
+    background: linear-gradient(135deg, rgba(91, 191, 186, 0.1), rgba(91, 191, 186, 0.05));
+    border: 1px solid var(--color-teal);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.draft-restored-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.draft-restored-text {
+    flex: 1;
+    color: var(--color-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.draft-restored-dismiss {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--color-gray);
+    flex-shrink: 0;
+}
+
+.draft-restored-dismiss:hover {
+    color: var(--color-dark);
+}
+
+/* ================================
+   Responsive: Save Draft
+   ================================ */
+@media (max-width: 480px) {
+    .draft-modal {
+        padding: 28px 20px;
+    }
+
+    .draft-modal-actions {
+        flex-direction: column;
+    }
+
+    .btn-draft {
+        padding: 10px 16px;
+        font-size: 0.85rem;
     }
 }
