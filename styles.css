@@ -1795,6 +1795,28 @@ textarea.error {
     white-space: nowrap;
 }
 
+/* ========== Apply Button Burst ========== */
+.apply-toggle-wrap {
+    position: relative;
+    display: block;
+    padding: 34px 0;
+}
+
+.burst-svg {
+    position: absolute;
+    top: 0;
+    left: -44px;
+    width: calc(100% + 88px);
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.apply-toggle {
+    position: relative;
+    z-index: 1;
+}
+
 /* ========== HomeBase Hackathon CTA ========== */
 .hackathon-cta {
     background: #EEF0FF;

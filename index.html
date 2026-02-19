@@ -150,10 +150,27 @@
             <!-- Application Form -->
             <div class="application">
                 <!-- Collapsible Toggle Button -->
-                <button class="apply-toggle" id="applyToggle">
-                    <span class="toggle-text">Apply for the Pitch Contest</span>
-                    <span class="toggle-icon">+</span>
-                </button>
+                <div class="apply-toggle-wrap">
+                    <svg class="burst-svg" viewBox="0 0 620 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+                        <polygon points="
+                            30,28  52,4   78,26  108,2  140,28 172,4  205,26
+                            240,4  272,28 308,2  342,28 378,4  410,26
+                            445,2  478,28 512,4  542,26 568,4  590,28
+                            612,52 590,70 615,90 590,110 612,130
+                            590,122 568,148 542,122 512,148 478,122
+                            445,148 410,122 378,148 342,122 308,148
+                            272,122 240,148 205,122 172,148 140,122
+                            108,148 78,122 52,148 30,122
+                            8,110  30,90  6,70   30,52  8,28
+                        "
+                        fill="none" stroke="#111" stroke-width="5"
+                        stroke-linejoin="round" stroke-linecap="round"/>
+                    </svg>
+                    <button class="apply-toggle" id="applyToggle">
+                        <span class="toggle-text">Apply for the Pitch Contest</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+                </div>
 
                 <!-- Application Content (initially hidden) -->
                 <div class="application-content" id="applicationContent">
