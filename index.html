@@ -126,6 +126,17 @@
         </div>
     </section>
 
+    <!-- HomeBase Hackathon CTA -->
+    <section class="hackathon-cta">
+        <div class="container">
+            <p class="hackathon-cta-eyebrow">Founder Track Prep</p>
+            <h2 class="hackathon-cta-heading">Want help preparing your application?</h2>
+            <a href="https://homebasehackathon.com/" class="btn-hackathon" target="_blank" rel="noopener">
+                RSVP FOR FEB 28 HACKATHON
+            </a>
+        </div>
+    </section>
+
     <!-- Pitch CTA Banner + Application Form -->
     <section class="pitch-cta-banner" id="application">
         <div class="container">
@@ -497,6 +508,116 @@
         </div>
     </section>
 
+    <!-- Photo Gallery Section -->
+    <section class="photo-gallery">
+        <div class="container container--wide">
+            <h2 class="section-title">Your Stage Awaits</h2>
+            <div class="gallery-wrap" id="galleryWrap">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_100"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_8593"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_134"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9139"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_143"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_8955"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_186"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9153"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_306"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                    <div class="gallery-item">
+                        <img
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9237"
+                            alt=""
+                            loading="lazy"
+                            class="gallery-img"
+                        >
+                    </div>
+                </div>
+                <div class="gallery-fade"></div>
+            </div>
+            <button class="gallery-toggle" id="galleryToggle">more photos &#8595;</button>
+        </div>
+    </section>
+    <script>
+    (function () {
+        var wrap = document.getElementById('galleryWrap');
+        var btn  = document.getElementById('galleryToggle');
+        btn.addEventListener('click', function () {
+            if (wrap.classList.contains('is-open')) {
+                wrap.style.maxHeight = '750px';
+                wrap.classList.remove('is-open');
+                btn.innerHTML = 'more photos &#8595;';
+            } else {
+                wrap.style.maxHeight = wrap.scrollHeight + 'px';
+                wrap.classList.add('is-open');
+                btn.innerHTML = 'less photos &#8593;';
+            }
+        });
+    })();
+    </script>
+
     <!-- About Co-Founders Section -->
     <section class="about-cofounders">
         <div class="container">
@@ -513,6 +634,16 @@
             <a href="https://www.cofoundersthemusical.com" class="btn btn-primary" target="_blank">
                 Learn More
             </a>
+        </div>
+    </section>
+
+    <!-- Founder Track Section -->
+    <section class="founder-track">
+        <div class="container">
+            <div class="tv-wrapper">
+                <img class="tv-bg" src="assets/update%20assets/TV-full.jpg" alt="Founder Track Timeline">
+                <span class="tv-label">Key Dates</span>
+            </div>
         </div>
     </section>
 

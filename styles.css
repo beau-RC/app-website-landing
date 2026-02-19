@@ -1666,3 +1666,175 @@ textarea.error {
         font-size: 0.85rem;
     }
 }
+
+/* ========== Photo Gallery ========== */
+.photo-gallery {
+    padding: 60px 20px;
+    background: var(--color-dark);
+}
+
+.photo-gallery .section-title {
+    color: var(--color-white);
+}
+
+.photo-gallery .section-title::after {
+    background: var(--color-gold);
+}
+
+.container--wide {
+    max-width: 1200px;
+}
+
+/* Collapsible wrapper */
+.gallery-wrap {
+    position: relative;
+    max-height: 750px;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+/* Gradient fade at bottom of collapsed state */
+.gallery-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, var(--color-dark));
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-wrap.is-open .gallery-fade {
+    opacity: 0;
+}
+
+/* "See more" toggle link */
+.gallery-toggle {
+    display: block;
+    margin: 18px auto 0;
+    background: none;
+    border: none;
+    color: var(--color-gold);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.gallery-toggle:hover {
+    opacity: 0.7;
+}
+
+.gallery-grid {
+    column-count: 3;
+    column-gap: 10px;
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+}
+
+.gallery-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 560px) {
+    .gallery-grid {
+        column-count: 1;
+    }
+}
+
+/* ========== Founder Track ========== */
+.founder-track {
+    padding: 60px 20px;
+    background: var(--color-dark);
+}
+
+.tv-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.tv-bg {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+.tv-label {
+    position: absolute;
+    top: calc(2.5% - 52px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: #C49A20;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+}
+
+/* ========== HomeBase Hackathon CTA ========== */
+.hackathon-cta {
+    background: #EEF0FF;
+    padding: 52px 20px;
+    text-align: center;
+}
+
+.hackathon-cta-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7C3AED;
+    margin: 0 0 10px;
+}
+
+.hackathon-cta-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    color: #3B0FA0;
+    margin: 0 0 28px;
+}
+
+.btn-hackathon {
+    display: inline-block;
+    background: #5B21B6;
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 50px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-hackathon:hover {
+    background: #4C1D95;
+    transform: translateY(-2px);
+}
+
