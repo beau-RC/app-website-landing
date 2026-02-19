@@ -32,7 +32,7 @@
                 <img src="assets/Title.png" alt="Live Concert & Pitch Contest - April 11th" class="hero-title-img">
 
                 <!-- Buy Tickets Button -->
-                <a href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815" target="_blank" rel="noopener noreferrer" class="btn-tickets">
+                <a id="hero-tickets-btn" href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815" target="_blank" rel="noopener noreferrer" class="btn-tickets">
                     <img src="assets/ticketsbuttontexture.png" alt="Buy Tickets">
                 </a>
 
@@ -745,6 +745,25 @@
             </div>
         </div>
     </footer>
+
+    <a id="float-tickets"
+       class="float-tickets"
+       href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815"
+       target="_blank" rel="noopener noreferrer">
+        <img src="assets/ticketsbuttontexture.png" alt="Get Tickets">
+    </a>
+
+    <script>
+    (function () {
+        var heroBtn  = document.getElementById('hero-tickets-btn');
+        var floatBtn = document.getElementById('float-tickets');
+        if (!heroBtn || !floatBtn) return;
+        var observer = new IntersectionObserver(function (entries) {
+            floatBtn.classList.toggle('is-visible', !entries[0].isIntersecting);
+        });
+        observer.observe(heroBtn);
+    })();
+    </script>
 
     <script src="app.js?v=4"></script>
 </body>

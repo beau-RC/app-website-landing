@@ -1860,3 +1860,41 @@ textarea.error {
     transform: translateY(-2px);
 }
 
+/* ========== Floating Tickets Button ========== */
+.float-tickets {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 500;
+    display: block;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+
+.float-tickets img {
+    display: block;
+    width: 140px;
+    height: auto;
+}
+
+.float-tickets.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.float-tickets:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.5)) brightness(1.05);
+}
+
+.float-tickets.form-open {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+}
+
