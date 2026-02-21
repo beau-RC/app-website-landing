@@ -1385,6 +1385,25 @@ textarea.error {
     font-size: 0.85rem;
 }
 
+.footer-legal {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-legal a {
+    color: #555;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.footer-legal a:hover {
+    color: var(--color-gray);
+}
+
 /* ================================
    Loading States
    ================================ */
