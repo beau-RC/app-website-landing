@@ -329,7 +329,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     width: 90%;
 }
 
@@ -346,6 +346,54 @@ a:hover {
     width: 80%;
     max-width: 500px;
     height: auto;
+}
+
+.google-sponsor-img {
+    width: 30%;
+    max-width: 120px;
+    height: auto;
+}
+
+@media (max-width: 750px) {
+    .sponsors-img {
+        max-width: 420px;
+    }
+    .google-sponsor-img {
+        max-width: 105px;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-sponsors {
+        /* NO top override — keep at 76% to avoid overlapping description text */
+        gap: 3px;
+    }
+
+    .hero-sponsors .sponsors-label {
+        font-size: clamp(0.4rem, 1.2vw, 0.6rem);
+    }
+
+    .sponsors-img {
+        width: 68%;
+    }
+
+    .google-sponsor-img {
+        width: 28%;
+        max-width: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-sponsors {
+        gap: 2px;
+    }
+    .sponsors-img {
+        width: 60%;
+    }
+    .google-sponsor-img {
+        width: 25%;
+        max-width: 75px;
+    }
 }
 
 /* Venue Bar */
