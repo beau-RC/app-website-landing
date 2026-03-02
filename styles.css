@@ -1908,6 +1908,15 @@ textarea.error {
     margin: 0 0 28px;
 }
 
+.hackathon-photo {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: 28px auto;
+}
+
 .btn-hackathon {
     display: inline-block;
     background: #5B21B6;
