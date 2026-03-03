@@ -2058,7 +2058,7 @@ textarea.error {
 }
 
 .storyteller-inner {
-    height: 480vh; /* 3 chapters × 160vh */
+    height: 240vh; /* 3 chapters × 80vh */
     position: relative;
 }
 
@@ -2203,7 +2203,7 @@ textarea.error {
         aspect-ratio: 16/9;
     }
     .storyteller-inner {
-        height: 720vh; /* more scroll space on mobile */
+        height: 360vh; /* more scroll space on mobile */
     }
     .storyteller-nav {
         left: 16px;
@@ -2222,7 +2222,7 @@ textarea.error {
 }
 
 .finalists-inner {
-    height: 1200vh;
+    height: 600vh;
     position: relative;
 }
 
@@ -2354,11 +2354,91 @@ textarea.error {
 
 @media (max-width: 768px) {
     .finalists-inner {
-        height: 1600vh;
+        height: 800vh;
     }
     .finalists-content {
         max-width: 100%;
         padding: 0 16px;
     }
+}
+
+/* Progress dots */
+.finalists-progress {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    z-index: 10;
+}
+
+.finalists-progress::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(212, 168, 83, 0.25);
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+
+.finalists-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(212, 168, 83, 0.3);
+    border: 2px solid rgba(212, 168, 83, 0.4);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    margin: 7px 0;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+.finalists-dot.active {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    transform: scale(1.4);
+}
+
+/* Skip button */
+.finalists-skip {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-gold);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.finalists-skip:hover { opacity: 1; }
+
+.finalists-skip svg {
+    animation: finalistsBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes finalistsBounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(4px); }
 }
 

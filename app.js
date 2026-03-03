@@ -1154,6 +1154,8 @@ async function checkForDraftRestore() {
     const blank  = document.querySelector('.finalists-tv-blank');
     const slides = Array.from(document.querySelectorAll('.finalists-tv-slide'));
     const cards  = Array.from(document.querySelectorAll('.finalist-card'));
+    const dotEls  = Array.from(document.querySelectorAll('.finalists-dot'));
+    const skipBtn = document.getElementById('finalistsSkip');
     const N      = slides.length; // 10
 
     function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
@@ -1230,6 +1232,12 @@ async function checkForDraftRestore() {
             card.style.opacity = opacity;
         });
 
+        // Active dot — highlight the dot matching the current slide
+        const activeIdx = clamp(Math.floor(current * N), 0, N - 1);
+        dotEls.forEach(function (dot, i) {
+            dot.classList.toggle('active', i === activeIdx);
+        });
+
         if (Math.abs(current - target) > 0.0001) {
             rafId = requestAnimationFrame(render);
         } else {
@@ -1241,6 +1249,24 @@ async function checkForDraftRestore() {
         target = getTarget();
         if (!rafId) rafId = requestAnimationFrame(render);
     }, { passive: true });
+
+    // Dot clicks — scroll to the centre of that slide's scroll segment
+    dotEls.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+            const docTop  = inner.getBoundingClientRect().top + window.scrollY;
+            const total   = inner.offsetHeight - window.innerHeight;
+            const targetP = (i + 0.5) / N;
+            window.scrollTo({ top: docTop + total * targetP, behavior: 'smooth' });
+        });
+    });
+
+    // Skip button — jump past the entire finalists module
+    if (skipBtn) {
+        skipBtn.addEventListener('click', function () {
+            const docBottom = inner.getBoundingClientRect().bottom + window.scrollY;
+            window.scrollTo({ top: docBottom, behavior: 'smooth' });
+        });
+    }
 
     render(); // paint initial state
 }());
