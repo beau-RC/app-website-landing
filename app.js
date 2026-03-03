@@ -1042,3 +1042,248 @@ async function checkForDraftRestore() {
         console.error('Error loading draft:', error);
     }
 }
+
+// ============================================================
+//  Spotlight Storyteller — scroll-driven animation
+// ============================================================
+(function () {
+    const inner = document.querySelector('.storyteller-inner');
+    if (!inner) return;
+
+    const chapters = Array.from(document.querySelectorAll('.storyteller-chapter'));
+    const navFills = Array.from(document.querySelectorAll('.storyteller-nav-fill'));
+    const N = chapters.length;
+
+    function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+    function mapRange(v, a, b, c, d) {
+        return c + (d - c) * clamp((v - a) / (b - a), 0, 1);
+    }
+
+    // getTarget() returns -0.12 → 0 while the hero is still scrolling off screen
+    // (rect.top > 0 = section not yet pinned), then 0 → 1 through the sticky phase.
+    // This lets chapter 01 start animating the moment any black is visible.
+    function getTarget() {
+        const rect = inner.getBoundingClientRect();
+        const total = inner.offsetHeight - window.innerHeight;
+        if (rect.top > 0) {
+            return mapRange(rect.top, window.innerHeight, 0, -0.12, 0);
+        }
+        return clamp(-rect.top / total, 0, 1);
+    }
+
+    // Init from current scroll position so hard-refresh mid-page looks correct
+    let target = getTarget();
+    let current = target;
+    let rafId = null;
+
+    function render() {
+        current += (target - current) * 0.08; // spring smoothing
+        const p = current;
+
+        chapters.forEach(function (chapter, i) {
+            const isEven = i % 2 === 0;
+            const s = i / N,  e = (i + 1) / N;
+            // Chapter 01: enter spans the approach (-0.12) through early sticky (0.02).
+            // Chapters 02 & 03: standard timing relative to their scroll band.
+            const tE0 = i === 0 ? -0.12 : s;
+            const tE1 = i === 0 ?  0.02 : s + 0.4 / N;
+            const iE0 = i === 0 ? -0.06 : s + 0.3 / N;
+            const iE1 = i === 0 ?  0.05 : s + 0.7 / N;
+            const x0  = e - 0.15 / N, x1  = e;
+
+            // Text
+            let tx = p < tE1
+                ? mapRange(p, tE0, tE1, isEven ? -200 : 200, 0)
+                : mapRange(p, x0,  x1,  0, isEven ? -100 : 100);
+            let to = p < tE1
+                ? mapRange(p, tE0, tE1, 0, 1)
+                : mapRange(p, x0,  x1,  1, 0);
+
+            // Image
+            let ix = p < iE1
+                ? mapRange(p, iE0, iE1, isEven ? 200 : -200, 0)
+                : mapRange(p, x0,  x1,  0, isEven ? 100 : -100);
+            let io = p < iE1
+                ? mapRange(p, iE0, iE1, 0, 1)
+                : mapRange(p, x0,  x1,  1, 0);
+            let isc = p < iE1
+                ? mapRange(p, iE0, iE1, 0.9, 1)
+                : 1;
+
+            const textEl  = chapter.querySelector('.chapter-text');
+            const imageEl = chapter.querySelector('.chapter-image');
+
+            chapter.style.opacity = Math.max(to, io);
+            textEl.style.transform  = 'translateX(' + tx + 'px)';
+            textEl.style.opacity    = to;
+            imageEl.style.transform = 'translateX(' + ix + 'px) scale(' + isc + ')';
+            imageEl.style.opacity   = io;
+
+            // Nav fill
+            if (navFills[i]) {
+                const pct = clamp((p - s) / (e - s), 0, 1);
+                navFills[i].style.transform = 'scaleY(' + pct + ')';
+            }
+        });
+
+        if (Math.abs(current - target) > 0.0001) {
+            rafId = requestAnimationFrame(render);
+        } else {
+            rafId = null;
+        }
+    }
+
+    window.addEventListener('scroll', function () {
+        target = getTarget();
+        if (!rafId) rafId = requestAnimationFrame(render);
+    }, { passive: true });
+
+    render(); // initial state
+}());
+
+// ============================================================
+//  Top 10 Finalists — scroll-driven TV reveal + text cards
+//  Slide 0  : opacity cross-fade (TV turning on)
+//  Slides 1–9: clip-path wipe, top-to-bottom pixel reveal
+//  Text cards: opacity fade, in sync with their paired TV slide
+// ============================================================
+(function () {
+    const inner  = document.querySelector('.finalists-inner');
+    if (!inner) return;
+
+    const blank  = document.querySelector('.finalists-tv-blank');
+    const slides = Array.from(document.querySelectorAll('.finalists-tv-slide'));
+    const cards  = Array.from(document.querySelectorAll('.finalist-card'));
+    const N      = slides.length; // 10
+
+    function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+    function mapRange(v, a, b, c, d) {
+        return c + (d - c) * clamp((v - a) / (b - a), 0, 1);
+    }
+
+    function getTarget() {
+        const rect  = inner.getBoundingClientRect();
+        const total = inner.offsetHeight - window.innerHeight;
+        return clamp(-rect.top / total, 0, 1);
+    }
+
+    // Slides 1–9 are hidden via clip-path (not opacity) so
+    // they don't block slides beneath them while waiting.
+    slides.forEach(function (slide, i) {
+        if (i > 0) {
+            slide.style.opacity  = '1';
+            slide.style.clipPath = 'inset(0 0 100% 0)';
+        }
+    });
+
+    let target  = getTarget();
+    let current = target;
+    let rafId   = null;
+
+    // buf: fraction of each segment used as dwell padding on each side.
+    // 0.02 = 20% dwell | 60% transition | 20% dwell per segment.
+    const buf = 0.02;
+
+    function render() {
+        current += (target - current) * 0.07;
+        const p = current;
+
+        // --- TV slides ---
+        slides.forEach(function (slide, i) {
+            const segStart = i / N;
+            const segEnd   = (i + 1) / N;
+
+            if (i === 0) {
+                // GrioTime: opacity cross-fade (TV turning on)
+                slide.style.opacity = mapRange(p, segStart + buf, segEnd - buf, 0, 1);
+            } else {
+                // Finnie → Style-MyCrown: wipe from top to bottom.
+                const pct = mapRange(p, segStart + buf, segEnd - buf, 100, 0);
+                slide.style.clipPath = 'inset(0 0 ' + pct.toFixed(3) + '% 0)';
+            }
+        });
+
+        // Blank fades out in sync with slide 0 fading in.
+        blank.style.opacity = mapRange(p, buf, 1 / N - buf, 1, 0);
+
+        // --- Text cards ---
+        // Card i fades IN with its TV slide, stays visible through the dwell,
+        // then fades OUT as the next TV slide comes in.
+        cards.forEach(function (card, i) {
+            const fadeInStart  = i / N + buf;
+            const fadeInEnd    = (i + 1) / N - buf;
+            const fadeOutStart = (i + 1) / N + buf;
+            const fadeOutEnd   = (i + 2) / N - buf;
+            var opacity;
+            if (i === N - 1) {
+                // Last card: fade in and stay.
+                opacity = mapRange(p, fadeInStart, fadeInEnd, 0, 1);
+            } else if (p <= fadeInStart) {
+                opacity = 0;
+            } else if (p <= fadeInEnd) {
+                opacity = mapRange(p, fadeInStart, fadeInEnd, 0, 1);
+            } else if (p <= fadeOutStart) {
+                opacity = 1;
+            } else {
+                opacity = mapRange(p, fadeOutStart, fadeOutEnd, 1, 0);
+            }
+            card.style.opacity = opacity;
+        });
+
+        if (Math.abs(current - target) > 0.0001) {
+            rafId = requestAnimationFrame(render);
+        } else {
+            rafId = null;
+        }
+    }
+
+    window.addEventListener('scroll', function () {
+        target = getTarget();
+        if (!rafId) rafId = requestAnimationFrame(render);
+    }, { passive: true });
+
+    render(); // paint initial state
+}());
+
+// ============================================================
+//  Hackathon photo carousel
+// ============================================================
+(function () {
+    const carousel = document.querySelector('.hackathon-carousel');
+    if (!carousel) return;
+
+    const track  = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const dots   = Array.from(carousel.querySelectorAll('.carousel-dot'));
+    const prev   = carousel.querySelector('.carousel-btn-prev');
+    const next   = carousel.querySelector('.carousel-btn-next');
+    const total  = slides.length;
+    let current  = 0;
+    let timer;
+
+    function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function (d, i) {
+            d.classList.toggle('active', i === current);
+        });
+    }
+
+    function startAuto() {
+        timer = setInterval(function () { goTo(current + 1); }, 4000);
+    }
+
+    function resetAuto() {
+        clearInterval(timer);
+        startAuto();
+    }
+
+    prev.addEventListener('click', function () { goTo(current - 1); resetAuto(); });
+    next.addEventListener('click', function () { goTo(current + 1); resetAuto(); });
+    dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { goTo(i); resetAuto(); });
+    });
+
+    goTo(0);
+    startAuto();
+}());
