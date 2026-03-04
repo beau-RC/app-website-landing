@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply | All People Powered</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+    <!-- 1. Password gate (visible on load) -->
+    <div class="password-gate" id="passwordGate">
+        <div class="password-modal">
+            <h2>Members Only</h2>
+            <p>Enter your access code to apply.</p>
+            <form id="passwordForm">
+                <input type="password" id="passwordInput" placeholder="Access code" autocomplete="off">
+                <p class="password-error" id="passwordError"></p>
+                <button type="submit">Enter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Page content (hidden until correct password) -->
+    <div id="homebaseContent" style="display:none">
+
+        <!-- Pitch CTA Banner -->
+        <section class="pitch-cta-banner" id="application">
+            <div class="container">
+                <h2 class="pitch-cta-banner-title">Ready to pitch on a bigger stage?</h2>
+                <p class="pitch-cta-banner-text">Apply now to be part of the <strong>All People Powered</strong> live pitch competition and accelerator experience.</p>
+            </div>
+        </section>
+
+        <!-- Application Form -->
+        <section class="about-cofounders">
+            <div class="container">
+                <div class="application">
+                    <!-- Collapsible Toggle Button -->
+                    <div class="apply-toggle-wrap">
+                        <svg class="burst-svg" viewBox="0 0 620 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+                            <polygon points="
+                                30,28  52,4   78,26  108,2  140,28 172,4  205,26
+                                240,4  272,28 308,2  342,28 378,4  410,26
+                                445,2  478,28 512,4  542,26 568,4  590,28
+                                612,52 590,70 615,90 590,110 612,130
+                                590,122 568,148 542,122 512,148 478,122
+                                445,148 410,122 378,148 342,122 308,148
+                                272,122 240,148 205,122 172,148 140,122
+                                108,148 78,122 52,148 30,122
+                                8,110  30,90  6,70   30,52  8,28
+                            "
+                            fill="none" stroke="#111" stroke-width="5"
+                            stroke-linejoin="round" stroke-linecap="round"/>
+                        </svg>
+                        <button class="apply-toggle" id="applyToggle">
+                            <span class="toggle-text">Apply for the Pitch Contest</span>
+                            <span class="toggle-icon">+</span>
+                        </button>
+                    </div>
+
+                    <!-- Application Content (initially hidden) -->
+                    <div class="application-content" id="applicationContent">
+                        <!-- Draft Restoration Banner -->
+                        <div class="draft-restored-banner" id="draftRestoredBanner" style="display: none;">
+                            <div class="draft-restored-content">
+                                <span class="draft-restored-text">Your saved draft has been restored. Continue where you left off!</span>
+                                <button class="draft-restored-dismiss" id="draftDismissBanner">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Indicator -->
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-steps">
+                                <span class="step active" data-step="1">1</span>
+                                <span class="step" data-step="2">2</span>
+                                <span class="step" data-step="3">3</span>
+                            </div>
+                            <div class="progress-labels">
+                                <span>Team</span>
+                                <span>Startup</span>
+                                <span>Uploads</span>
+                            </div>
+                        </div>
+
+                        <form id="applicationForm" class="multi-step-form" novalidate>
+                            <!-- Step 1: Team -->
+                            <div class="form-step active" data-step="1">
+                                <h3 class="step-title">Team</h3>
+                                <p class="step-description">Tell us about yourself and your team</p>
+
+                                <div class="form-group">
+                                    <label for="founderName">Founder Name(s) <span class="required">*</span></label>
+                                    <input type="text" id="founderName" name="founderName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <p class="field-hint">We'll use this to contact you about your application</p>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="location">Location <span class="required">*</span></label>
+                                    <input type="text" id="location" name="location" placeholder="City, State" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bio">One-Sentence Bio <span class="required">*</span></label>
+                                    <textarea id="bio" name="bio" rows="2" placeholder="Who are you in one sentence?" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Are you building solo or with a team? <span class="required">*</span></label>
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="teamStatus" value="solo" required>
+                                            <span>Solo Founder</span>
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="teamStatus" value="team">
+                                            <span>I have a team</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group team-roles-group" style="display: none;">
+                                    <label for="teamRoles">Describe your team and their roles</label>
+                                    <textarea id="teamRoles" name="teamRoles" rows="3" placeholder="Who does what? What are their backgrounds?"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="linkedin">LinkedIn URL</label>
+                                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Demographics (optional)</label>
+                                    <p class="field-hint">Help us understand who we're reaching. Select all that apply.</p>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Black/African American">
+                                            <span>Black/African American</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Hispanic/Latino">
+                                            <span>Hispanic/Latino</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Asian">
+                                            <span>Asian</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Native American">
+                                            <span>Native American</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Pacific Islander">
+                                            <span>Pacific Islander</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="White">
+                                            <span>White</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="LGBTQ+">
+                                            <span>LGBTQ+</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Woman">
+                                            <span>Woman</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Non-binary">
+                                            <span>Non-binary</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Veteran">
+                                            <span>Veteran</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Immigrant">
+                                            <span>Immigrant</span>
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="demographics" value="Person with Disability">
+                                            <span>Person with Disability</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Startup -->
+                            <div class="form-step" data-step="2">
+                                <h3 class="step-title">Startup</h3>
+                                <p class="step-description">Tell us about what you're building</p>
+
+                                <div class="form-group">
+                                    <label for="problem">What problem are you solving and why now? <span class="required">*</span></label>
+                                    <textarea id="problem" name="problem" rows="4" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="solution">What's your solution? (1-2 sentences) <span class="required">*</span></label>
+                                    <textarea id="solution" name="solution" rows="2" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="targetCustomer">Who is your target customer? <span class="required">*</span></label>
+                                    <p class="field-hint">Who are they? What do they care about? Where do they spend time?</p>
+                                    <textarea id="targetCustomer" name="targetCustomer" rows="4" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="traction">What traction do you have? <span class="required">*</span></label>
+                                    <p class="field-hint">Share key customer research findings, early signups, waitlist numbers, or expressions of interest</p>
+                                    <textarea id="traction" name="traction" rows="5" required></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="whyYou">Why you? Why this? <span class="required">*</span></label>
+                                    <p class="field-hint">Why does this matter to you personally and why are you applying to this accelerator?</p>
+                                    <textarea id="whyYou" name="whyYou" rows="4" required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Uploads -->
+                            <div class="form-step" data-step="3">
+                                <h3 class="step-title">Uploads</h3>
+                                <p class="step-description">Upload your materials</p>
+
+                                <div class="form-group">
+                                    <label>Video Introduction (60-90 seconds) <span class="required">*</span></label>
+                                    <p class="field-hint">Introduce yourself and your venture. Be authentic!</p>
+                                    <div class="file-upload-zone" data-field="videoIntro">
+                                        <div class="upload-icon">📹</div>
+                                        <p class="upload-text">Drag & drop your video here or click to browse</p>
+                                        <p class="upload-hint">MP4, MOV, or WebM (max 100MB)</p>
+                                        <input type="file" id="videoIntro" name="videoIntro" accept="video/*" class="file-input">
+                                        <div class="upload-preview"></div>
+                                    </div>
+                                    <input type="hidden" name="videoIntroUrl" id="videoIntroUrl">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Pitch Deck (if available)</label>
+                                    <p class="field-hint">PDF or PowerPoint, 10 slides max recommended</p>
+                                    <div class="file-upload-zone" data-field="pitchDeck">
+                                        <div class="upload-icon">📊</div>
+                                        <p class="upload-text">Drag & drop your pitch deck here or click to browse</p>
+                                        <p class="upload-hint">PDF or PPTX (max 25MB)</p>
+                                        <input type="file" id="pitchDeck" name="pitchDeck" accept=".pdf,.pptx,.ppt" class="file-input">
+                                        <div class="upload-preview"></div>
+                                    </div>
+                                    <input type="hidden" name="pitchDeckUrl" id="pitchDeckUrl">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Professional Headshot <span class="required">*</span></label>
+                                    <p class="field-hint">A clear photo of you for promotional materials if selected</p>
+                                    <div class="file-upload-zone" data-field="headshot">
+                                        <div class="upload-icon">📷</div>
+                                        <p class="upload-text">Drag & drop your headshot here or click to browse</p>
+                                        <p class="upload-hint">JPG or PNG (max 10MB)</p>
+                                        <input type="file" id="headshot" name="headshot" accept="image/*" class="file-input">
+                                        <div class="upload-preview"></div>
+                                    </div>
+                                    <input type="hidden" name="headshotUrl" id="headshotUrl">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="timeCommitment" id="timeCommitment" required>
+                                        <span>If accepted, I commit to attending three mentorship workshops in Oakland, rehearsals at the venue, and pitching at the live event <span class="required">*</span></span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="termsAgreed" id="termsAgreed" required>
+                                        <span>I agree to allow my submission materials to be used for promotional purposes if selected <span class="required">*</span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Form Navigation -->
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">
+                                    ← Previous
+                                </button>
+                                <button type="button" class="btn btn-draft" id="saveDraftBtn">
+                                    Save Draft
+                                </button>
+                                <button type="button" class="btn btn-primary" id="nextBtn">
+                                    Next →
+                                </button>
+                                <button type="submit" class="btn btn-submit" id="submitBtn" style="display: none;">
+                                    Submit Application
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Save Draft Modal -->
+                        <div class="draft-modal-overlay" id="draftModal" style="display: none;">
+                            <div class="draft-modal">
+                                <button class="draft-modal-close" id="draftModalClose">&times;</button>
+
+                                <!-- Default State -->
+                                <div class="draft-modal-form" id="draftModalForm">
+                                    <h3 class="draft-modal-title">Save Your Draft</h3>
+                                    <p class="draft-modal-text">Enter your email to receive a link to continue your application later.</p>
+                                    <div class="form-group">
+                                        <input type="email" id="draftEmail" class="draft-email-input"
+                                               placeholder="your@email.com">
+                                        <div class="draft-error" id="draftError" style="display: none;"></div>
+                                    </div>
+                                    <div class="draft-modal-actions">
+                                        <button type="button" class="btn btn-secondary" id="draftCancelBtn">Cancel</button>
+                                        <button type="button" class="btn btn-submit" id="draftConfirmBtn">Save & Send Link</button>
+                                    </div>
+                                </div>
+
+                                <!-- Success State -->
+                                <div class="draft-modal-success" id="draftModalSuccess" style="display: none;">
+                                    <div class="draft-success-icon">&#10003;</div>
+                                    <h3 class="draft-modal-title">Draft Saved!</h3>
+                                    <p class="draft-modal-text">Check your email for a link to resume your application. The link expires in 30 days.</p>
+                                    <button type="button" class="btn btn-primary" id="draftCloseBtn">Close</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            <div class="success-icon">🎉</div>
+                            <h3>Application Submitted!</h3>
+                            <p>Thank you for applying to the APP Accelerator. We've received your application and will be in touch soon.</p>
+                            <p>Keep an eye on your inbox for updates!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 3. Inline password gate script (runs before app.js) -->
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var input = document.getElementById('passwordInput');
+            var error = document.getElementById('passwordError');
+            if (input.value === 'esatathompson') {
+                document.getElementById('passwordGate').classList.add('hidden');
+                document.getElementById('homebaseContent').style.display = '';
+                // Auto-expand the application form
+                var content = document.getElementById('applicationContent');
+                var toggle  = document.getElementById('applyToggle');
+                if (content) content.classList.add('expanded');
+                if (toggle)  toggle.classList.add('expanded');
+            } else {
+                error.textContent = 'Incorrect code. Please try again.';
+                input.value = '';
+                input.focus();
+            }
+        });
+    </script>
+
+    <script src="app.js?v=4"></script>
+</body>
+</html>
