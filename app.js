@@ -1143,19 +1143,23 @@ async function checkForDraftRestore() {
 
 // ============================================================
 //  Top 10 Finalists — scroll-driven TV reveal + text cards
-//  Slide 0  : opacity cross-fade (TV turning on)
+//  Slide 0  : opacity cross-fade (TV turning on) — Choice Scores (TOP 3)
 //  Slides 1–9: clip-path wipe, top-to-bottom pixel reveal
+//  Slides 0–2: TOP 3 FINALIST badge | Slides 3–9: TOP 10 FINALIST badge
 //  Text cards: opacity fade, in sync with their paired TV slide
 // ============================================================
 (function () {
     const inner  = document.querySelector('.finalists-inner');
     if (!inner) return;
 
-    const blank  = document.querySelector('.finalists-tv-blank');
-    const slides = Array.from(document.querySelectorAll('.finalists-tv-slide'));
-    const cards  = Array.from(document.querySelectorAll('.finalist-card'));
-    const dotEls  = Array.from(document.querySelectorAll('.finalists-dot'));
-    const skipBtn = document.getElementById('finalistsSkip');
+    const blank    = document.querySelector('.finalists-tv-blank');
+    const slides   = Array.from(document.querySelectorAll('.finalists-tv-slide'));
+    const cards    = Array.from(document.querySelectorAll('.finalist-card'));
+    const dotEls   = Array.from(document.querySelectorAll('.finalists-dot'));
+    const skipBtn  = document.getElementById('finalistsSkip');
+    const titleImg = document.querySelector('.finalists-title-img');
+    const TOP3_SRC  = "assets/update assets/TV-Web PNGs/TOP 3 FINALIST.png";
+    const TOP10_SRC = "assets/update assets/TV-Web PNGs/TOP 10 FINALIST title.png";
     const N      = slides.length; // 10
 
     function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
@@ -1196,7 +1200,7 @@ async function checkForDraftRestore() {
             const segEnd   = (i + 1) / N;
 
             if (i === 0) {
-                // GrioTime: opacity cross-fade (TV turning on)
+                // ChoiceScores: opacity cross-fade (TV turning on)
                 slide.style.opacity = mapRange(p, segStart + buf, segEnd - buf, 0, 1);
             } else {
                 // Finnie → Style-MyCrown: wipe from top to bottom.
@@ -1237,6 +1241,17 @@ async function checkForDraftRestore() {
         dotEls.forEach(function (dot, i) {
             dot.classList.toggle('active', i === activeIdx);
         });
+
+        // Swap overlay badge: TOP 3 until slide 3 (GrioTime) is fully revealed,
+        // then switch to TOP 10. Threshold = end of slide 3's wipe animation.
+        if (titleImg) {
+            const isTop3 = current * N < 3 + buf * N; // switches as soon as GrioTime wipe begins
+            const newSrc = isTop3 ? TOP3_SRC : TOP10_SRC;
+            if (!titleImg.src.endsWith(newSrc)) {
+                titleImg.src = newSrc;
+            }
+            titleImg.classList.toggle('is-top3', isTop3);
+        }
 
         if (Math.abs(current - target) > 0.0001) {
             rafId = requestAnimationFrame(render);

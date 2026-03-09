@@ -2257,12 +2257,22 @@ textarea.error {
 
 .finalists-title-img {
     position: absolute;
-    top: 25px;
-    left: 15px;
-    width: 25%;
-    max-width: 140px;
+    top: 30px;
+    right: 110px;
+    left: auto;
+    width: 26%;
+    max-width: 144px;
     height: auto;
     z-index: 10;
+    transform: rotate(12deg);
+}
+
+.finalists-title-img.is-top3 {
+    top: 25px;
+    left: 15px;
+    right: auto;
+    width: 25%;
+    max-width: 140px;
     transform: rotate(-20deg);
 }
 
