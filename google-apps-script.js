@@ -53,6 +53,11 @@ function doPost(e) {
       return handleSaveDraft(data);
     }
 
+    // Check if this is a sidedoor ticket request
+    if (e.parameter && e.parameter.action === 'sidedoor') {
+      return handleSidedoorSubmission(data);
+    }
+
     // Otherwise, handle form submission
     return handleFormSubmission(data);
 
@@ -62,6 +67,44 @@ function doPost(e) {
       success: false,
       error: error.toString()
     });
+  }
+}
+
+const SIDEDOOR_SHEET_NAME = 'Sidedoor';
+
+/**
+ * Handle sidedoor comp ticket request - append data to Sidedoor sheet
+ */
+function handleSidedoorSubmission(data) {
+  try {
+    var ss = SpreadsheetApp.openById(SHEET_ID);
+    var sheet = ss.getSheetByName(SIDEDOOR_SHEET_NAME);
+
+    // Create the sheet with headers if it doesn't exist yet
+    if (!sheet) {
+      sheet = ss.insertSheet(SIDEDOOR_SHEET_NAME);
+      var headers = ['Timestamp', 'First Name', 'Last Name', 'Email', 'Tickets Requested', 'Password Used'];
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+      sheet.setFrozenRows(1);
+    }
+
+    var row = [
+      data.timestamp || new Date().toISOString(),
+      data.firstName || '',
+      data.lastName || '',
+      data.email || '',
+      data.ticketsRequested || '',
+      data.password || ''
+    ];
+
+    sheet.appendRow(row);
+
+    return createJsonResponse({ success: true, message: 'Ticket request submitted successfully' });
+
+  } catch (error) {
+    console.error('Error in handleSidedoorSubmission:', error);
+    return createJsonResponse({ success: false, error: error.toString() });
   }
 }
 
