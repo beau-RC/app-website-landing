@@ -1153,7 +1153,7 @@ textarea.error {
 
 .judges-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     margin-top: 40px;
 }
@@ -1174,6 +1174,10 @@ textarea.error {
     text-align: center;
     box-shadow: var(--shadow-md);
     transition: transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
 }
 
 .judge-card:hover {
