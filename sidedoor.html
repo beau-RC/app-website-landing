@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=3">
     <style>
-        .sidedoor-section {
+        .sidedoor-closed {
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,167 +22,37 @@
             padding: 60px 20px;
         }
 
-        .sidedoor-card {
+        .sidedoor-closed-card {
             background: #fff;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
             padding: 48px 40px;
             max-width: 480px;
             width: 100%;
+            text-align: center;
         }
 
-        .sidedoor-logo {
-            text-align: center;
+        .sidedoor-closed-card img {
+            height: 48px;
+            width: auto;
             margin-bottom: 24px;
         }
 
-        .sidedoor-logo img {
-            height: 48px;
-            width: auto;
-        }
-
-        .sidedoor-card h1 {
+        .sidedoor-closed-card h1 {
             font-family: 'Righteous', cursive;
             font-size: 1.75rem;
-            color: var(--color-dark);
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .sidedoor-card .subtitle {
-            text-align: center;
-            color: var(--color-gray);
-            font-size: 0.95rem;
-            margin-bottom: 32px;
-            line-height: 1.5;
-        }
-
-        .sidedoor-form .form-group {
-            margin-bottom: 20px;
-        }
-
-        .sidedoor-form label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--color-dark);
-            margin-bottom: 6px;
-        }
-
-        .sidedoor-form input {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid #ddd;
-            border-radius: var(--radius-sm);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            color: var(--color-dark);
-            transition: border-color var(--transition);
-            box-sizing: border-box;
-        }
-
-        .sidedoor-form input:focus {
-            outline: none;
-            border-color: var(--color-teal);
-        }
-
-        .sidedoor-form input.error {
-            border-color: var(--color-error);
-        }
-
-        .field-error {
-            color: var(--color-error);
-            font-size: 0.8rem;
-            margin-top: 4px;
-            display: none;
-        }
-
-        .field-error.visible {
-            display: block;
-        }
-
-        .sidedoor-submit {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
-            color: #fff;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform var(--transition), box-shadow var(--transition);
-            margin-top: 8px;
-        }
-
-        .sidedoor-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .sidedoor-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .sidedoor-success {
-            text-align: center;
-            padding: 16px 0 8px;
-        }
-
-        .sidedoor-success .success-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--color-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-
-        .sidedoor-success .success-icon svg {
-            width: 30px;
-            height: 30px;
-            stroke: #fff;
-            fill: none;
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .sidedoor-success h2 {
-            font-family: 'Righteous', cursive;
-            font-size: 1.5rem;
             color: var(--color-dark);
             margin-bottom: 12px;
         }
 
-        .sidedoor-success p {
+        .sidedoor-closed-card p {
             color: var(--color-gray);
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        .form-submit-error {
-            background: #ffeaea;
-            border: 1px solid #f8c4c4;
-            border-radius: var(--radius-sm);
-            color: var(--color-error);
-            font-size: 0.875rem;
-            padding: 10px 14px;
-            margin-top: 12px;
-            display: none;
-        }
-
-        .form-submit-error.visible {
-            display: block;
-        }
-
         @media (max-width: 520px) {
-            .sidedoor-card {
+            .sidedoor-closed-card {
                 padding: 36px 24px;
             }
         }
@@ -190,196 +60,13 @@
 </head>
 <body>
 
-    <!-- Password gate (visible on load) -->
-    <div class="password-gate" id="passwordGate">
-        <div class="password-modal">
-            <h2>You found the side door</h2>
-            <p>Enter the password to claim your tickets.</p>
-            <form id="passwordForm">
-                <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
-                <p class="password-error" id="passwordError"></p>
-                <button type="submit">Enter</button>
-            </form>
+    <section class="sidedoor-closed">
+        <div class="sidedoor-closed-card">
+            <img src="assets/APP-Horizontal-small.png" alt="All People Powered">
+            <h1>This entry is now closed</h1>
+            <p>Ticket requests are no longer being accepted through this page.</p>
         </div>
-    </div>
-
-    <!-- Page content (hidden until correct password) -->
-    <div id="sidedoorContent" style="display:none">
-        <section class="sidedoor-section">
-            <div class="sidedoor-card">
-                <div class="sidedoor-logo">
-                    <img src="assets/APP-Horizontal-small.png" alt="All People Powered">
-                </div>
-
-                <!-- Form view -->
-                <div id="formView">
-                    <h1>Claim Your Tickets</h1>
-                    <p class="subtitle">You've been invited to attend All People Powered as our guest. Fill out the form below and we'll take care of the rest.</p>
-
-                    <form class="sidedoor-form" id="sidedoorForm" novalidate>
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name">
-                            <p class="field-error" id="firstNameError">Please enter your first name.</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name">
-                            <p class="field-error" id="lastNameError">Please enter your last name.</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email">
-                            <p class="field-error" id="emailError">Please enter a valid email address.</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ticketsRequested">Number of Tickets Requested</label>
-                            <input type="number" id="ticketsRequested" name="ticketsRequested" value="1" min="1" max="10">
-                            <p class="field-error" id="ticketsError">Please enter a number between 1 and 10.</p>
-                        </div>
-
-                        <button type="submit" class="sidedoor-submit" id="submitBtn">Request Tickets</button>
-                        <p class="form-submit-error" id="submitError">Something went wrong. Please try again.</p>
-                    </form>
-                </div>
-
-                <!-- Success view (hidden until submit) -->
-                <div id="successView" style="display:none">
-                    <div class="sidedoor-success">
-                        <div class="success-icon">
-                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <h2>We got you!</h2>
-                        <p>We'll be in touch soon to confirm your spot.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // ── Password configuration ──────────────────────────────────────────
-        // Add new passwords here as new groups are invited.
-        // Each password should be lowercase; comparison is case-insensitive.
-        const VALID_PASSWORDS = ['soup', 'bgc', 'esata510'];
-
-        // Tracks which password the user entered (set on successful unlock)
-        let enteredPassword = '';
-
-        // ── Password gate logic ─────────────────────────────────────────────
-        document.getElementById('passwordForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const input = document.getElementById('passwordInput');
-            const error = document.getElementById('passwordError');
-            const attempt = input.value.trim().toLowerCase();
-
-            if (VALID_PASSWORDS.includes(attempt)) {
-                enteredPassword = input.value.trim(); // store original casing
-                document.getElementById('passwordGate').classList.add('hidden');
-                document.getElementById('sidedoorContent').style.display = '';
-            } else {
-                error.textContent = 'Incorrect code. Please try again.';
-                input.value = '';
-                input.focus();
-            }
-        });
-
-        // ── Form validation helpers ─────────────────────────────────────────
-        function showError(fieldId, errorId) {
-            document.getElementById(fieldId).classList.add('error');
-            document.getElementById(errorId).classList.add('visible');
-        }
-
-        function clearError(fieldId, errorId) {
-            document.getElementById(fieldId).classList.remove('error');
-            document.getElementById(errorId).classList.remove('visible');
-        }
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        // Clear errors on input
-        ['firstName', 'lastName', 'email', 'ticketsRequested'].forEach(function (id) {
-            document.getElementById(id).addEventListener('input', function () {
-                this.classList.remove('error');
-                const errorEl = document.getElementById(id + 'Error') ||
-                                document.getElementById('ticketsError');
-                if (errorEl) errorEl.classList.remove('visible');
-            });
-        });
-
-        // ── Form submission ─────────────────────────────────────────────────
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwq4ksGoV49xkEUqi5Av_lz4zFqeESt-pbcL7N-pvdLS53sZWr6MqDnK7i3rbyslxMe/exec';
-
-        document.getElementById('sidedoorForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName  = document.getElementById('lastName').value.trim();
-            const email     = document.getElementById('email').value.trim();
-            const tickets   = document.getElementById('ticketsRequested').value.trim();
-
-            let valid = true;
-
-            if (!firstName) { showError('firstName', 'firstNameError'); valid = false; }
-            else { clearError('firstName', 'firstNameError'); }
-
-            if (!lastName) { showError('lastName', 'lastNameError'); valid = false; }
-            else { clearError('lastName', 'lastNameError'); }
-
-            if (!email || !isValidEmail(email)) { showError('email', 'emailError'); valid = false; }
-            else { clearError('email', 'emailError'); }
-
-            const ticketNum = parseInt(tickets, 10);
-            if (!tickets || isNaN(ticketNum) || ticketNum < 1 || ticketNum > 10) {
-                showError('ticketsRequested', 'ticketsError'); valid = false;
-            } else {
-                clearError('ticketsRequested', 'ticketsError');
-            }
-
-            if (!valid) return;
-
-            const submitBtn = document.getElementById('submitBtn');
-            const submitError = document.getElementById('submitError');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Submitting…';
-            submitError.classList.remove('visible');
-
-            const payload = {
-                action: 'sidedoor',
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                ticketsRequested: ticketNum,
-                password: enteredPassword,
-                timestamp: new Date().toISOString()
-            };
-
-            const formData = new FormData();
-            formData.append('data', JSON.stringify(payload));
-
-            fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData })
-                .then(function (res) { return res.json(); })
-                .then(function (data) {
-                    if (data.success) {
-                        document.getElementById('formView').style.display = 'none';
-                        document.getElementById('successView').style.display = '';
-                    } else {
-                        throw new Error(data.error || 'Submission failed');
-                    }
-                })
-                .catch(function (err) {
-                    console.error('Submission error:', err);
-                    submitError.classList.add('visible');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Request Tickets';
-                });
-        });
-    </script>
+    </section>
 
 </body>
 </html>
