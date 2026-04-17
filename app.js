@@ -123,15 +123,11 @@ function toggleApplication() {
 function expandApplication() {
     applicationContent.classList.add('expanded');
     applyToggle.classList.add('expanded');
-    var floatBtn = document.getElementById('float-tickets');
-    if (floatBtn) floatBtn.classList.add('form-open');
 }
 
 function collapseApplication() {
     applicationContent.classList.remove('expanded');
     applyToggle.classList.remove('expanded');
-    var floatBtn = document.getElementById('float-tickets');
-    if (floatBtn) floatBtn.classList.remove('form-open');
 }
 
 // ================================

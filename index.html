@@ -11,60 +11,84 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=13">
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <!-- Preload hero background + video poster for instant first paint -->
+    <link rel="preload" as="image" href="assets/optimized/hero-bg.jpg">
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dok3pm3cw/video/upload/so_0,f_jpg,q_auto,w_1600/cofounders-gallery/app-event/sizzle_v2.jpg">
     <!-- Preload critical TV images so the animated module starts immediately -->
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/Blank-TV.avif">
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/GrioTime-clean-TV2.avif">
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-container">
-            <!-- Background -->
-            <img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1920/v1771484961/zflnzvbnvxlst0gnn9qp.jpg" alt="" class="hero-bg">
+    <!-- Hero Section: Sizzle reel from All People Powered, April 11 2026 -->
+    <header class="hero hero--video">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-video-container">
+            <img src="assets/Co-Founders Logo.png" alt="CO-FOUNDERS" class="hero-logo-cofounders">
+            <img src="assets/APP-Horizontal.png" alt="All People Powered" class="hero-logo-app">
 
-            <!-- Content Overlay -->
-            <div class="hero-content">
-                <!-- CO-FOUNDERS Logo -->
-                <img src="assets/Co-Founders Logo.png" alt="CO-FOUNDERS" class="hero-logo-cofounders">
-
-                <!-- Presents Text -->
-                <p class="hero-presents">+ All People Powered Presents</p>
-
-                <!-- Event Title (Live Concert & Pitch Contest / April 11th) -->
-                <img src="assets/Title.png" alt="Live Concert & Pitch Contest - April 11th" class="hero-title-img">
-
-                <!-- Buy Tickets Button -->
-                <a id="hero-tickets-btn" href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815" target="_blank" rel="noopener noreferrer" class="btn-tickets">
-                    <img src="assets/ticketsbuttontexture.png" alt="Buy Tickets">
-                </a>
-
-                <!-- Pitches Powered By -->
-                <div class="hero-powered">
-                    <span>Pitches Powered By</span>
-                    <img src="assets/Hii WAV Logo.png" alt="HiiWAV" class="hiiwav-logo">
-                </div>
-
-                <!-- Description Text -->
-                <div class="hero-description">
-                    <p>Live theatrical performances<br>from the Bay Area's hit musical<br>with special guests</p>
-                </div>
-
-                <!-- Sponsors -->
-                <div class="hero-sponsors">
-                    <span class="sponsors-label">Made Possible By</span>
-                    <img src="assets/Sponsors logosv3.png" alt="Office of Mayor Barbara Lee, Kapor Foundation, Hewlett Foundation, Omidyar Network, Doris Duke Foundation" class="sponsors-img">
-                    <img src="assets/GoogleForStartups_Horizontal_Reversed_RGB (4).png" alt="Google for Startups" class="google-sponsor-img">
-                </div>
-
-                <!-- Venue Bar -->
-                <div class="hero-venue">
-                    <img src="assets/HJK white.png" alt="HJK Arts - Henry J. Kaiser Center for the Arts" class="hjk-logo">
-                    <div class="venue-address">10 10th St, Oakland, CA 94607</div>
-                </div>
+            <div class="hero-video-frame">
+                <video
+                    id="heroVideo"
+                    class="hero-video"
+                    autoplay muted loop playsinline preload="metadata"
+                    poster="https://res.cloudinary.com/dok3pm3cw/video/upload/so_0,f_jpg,q_auto,w_1600/cofounders-gallery/app-event/sizzle_v2.jpg">
+                    <source src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto/cofounders-gallery/app-event/sizzle_v2.mp4" type="video/mp4">
+                </video>
+                <button id="heroVideoSound" class="hero-video-sound" type="button" aria-label="Unmute video" aria-pressed="false">
+                    <svg class="hero-video-sound-icon hero-video-sound-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                    <svg class="hero-video-sound-icon hero-video-sound-icon--on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    </svg>
+                    <span class="hero-video-sound-label">Tap for sound</span>
+                </button>
             </div>
+
+            <p class="hero-tagline">A Demo Day Like No Other</p>
         </div>
     </header>
+    <script>
+    (function () {
+        var vid = document.getElementById('heroVideo');
+        var btn = document.getElementById('heroVideoSound');
+        if (!vid || !btn) return;
+        btn.addEventListener('click', function () {
+            var nowOn = vid.muted; // was muted, becoming on
+            vid.muted = !vid.muted;
+            btn.setAttribute('aria-pressed', String(nowOn));
+            btn.setAttribute('aria-label', nowOn ? 'Mute video' : 'Unmute video');
+            btn.classList.toggle('is-on', nowOn);
+            var label = btn.querySelector('.hero-video-sound-label');
+            if (label) label.textContent = nowOn ? 'Tap to mute' : 'Tap for sound';
+            // iOS Safari: explicitly call play() after unmute to avoid pause
+            var p = vid.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+        });
+    })();
+    </script>
+
+    <!-- Sponsors Strip (white logos on black) -->
+    <section class="sponsors-strip">
+        <div class="container">
+            <span class="sponsors-strip-eyebrow">Made Possible By</span>
+            <div class="sponsors-strip-row">
+                <img src="assets/Barbra Lee Logo.png" alt="Office of Mayor Barbara Lee" class="sponsors-strip-logo">
+                <img src="assets/KP Logo.png" alt="Kapor Foundation" class="sponsors-strip-logo">
+                <img src="assets/HF Logo.png" alt="Hewlett Foundation" class="sponsors-strip-logo">
+                <img src="assets/OmidyarNetwork_Logo_Logo-Wordmark_Small_White.png" alt="Omidyar Network" class="sponsors-strip-logo sponsors-strip-logo--wide">
+                <img src="assets/optimized/ddf-white.png" alt="Doris Duke Foundation" class="sponsors-strip-logo sponsors-strip-logo--wide">
+                <img src="assets/GoogleForStartups_Horizontal_Reversed_RGB (4).png" alt="Google for Startups" class="sponsors-strip-logo sponsors-strip-logo--wide">
+                <img src="assets/HJK white.png" alt="Henry J. Kaiser Center for the Arts" class="sponsors-strip-logo">
+            </div>
+        </div>
+    </section>
 
     <!-- Spotlight Storyteller -->
     <section class="storyteller">
@@ -120,6 +144,68 @@
         </div>
       </div>
     </section>
+
+    <!-- APP Event Photo Gallery (April 11, 2026) -->
+    <section class="photo-gallery photo-gallery--app">
+        <div class="container container--wide">
+            <h2 class="app-gallery-heading">It Happened in Oakland&hellip;</h2>
+            <div class="gallery-wrap" id="appGalleryWrap">
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0538" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7572" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0540" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7587" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0552" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7592" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0565" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7603" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0585" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7628" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0591" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7641" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0600" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7646" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0611" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7675" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0619" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_E7507" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0627" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_E7549" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0638" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130246" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0691" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130299" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0715" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130310" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0739" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0740" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0742" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0750" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0754" alt="" loading="lazy" class="gallery-img"></div>
+                </div>
+                <div class="gallery-fade"></div>
+            </div>
+            <button class="gallery-toggle" id="appGalleryToggle">more photos &#8595;</button>
+        </div>
+    </section>
+    <script>
+    (function () {
+        var wrap = document.getElementById('appGalleryWrap');
+        var btn  = document.getElementById('appGalleryToggle');
+        if (!wrap || !btn) return;
+        btn.addEventListener('click', function () {
+            if (wrap.classList.contains('is-open')) {
+                wrap.style.maxHeight = '750px';
+                wrap.classList.remove('is-open');
+                btn.innerHTML = 'more photos &#8595;';
+            } else {
+                wrap.style.maxHeight = wrap.scrollHeight + 'px';
+                wrap.classList.add('is-open');
+                btn.innerHTML = 'less photos &#8593;';
+            }
+        });
+    })();
+    </script>
 
     <!-- Top 10 Finalists -->
     <section class="finalists">
@@ -248,7 +334,7 @@
               </div>
 
               <div class="finalist-card">
-                <h2 class="finalist-name">Skill Signal</h2>
+                <h2 class="finalist-name">VRIFYD</h2>
                 <span class="finalist-eyebrow">Brittany Lambert</span>
                 <p class="finalist-tagline">Skills matching for job seekers</p>
                 <div class="finalist-accent"></div>
@@ -304,20 +390,6 @@
                 Selected founders will present their ideas live on stage alongside theatrical performances
                 from the Bay Area hit musical, with special guests.
             </p>
-        </div>
-    </section>
-
-    <!-- Pitch Contest Hero Section -->
-    <section class="pitch-hero">
-        <div class="pitch-hero-bg">
-            <div class="spotlight spotlight-left"></div>
-            <div class="spotlight spotlight-center"></div>
-            <div class="spotlight spotlight-right"></div>
-        </div>
-        <div class="container">
-            <h2 class="pitch-hero-title">Pitch. Perform.<br>Get Funded — Live on Stage.</h2>
-            <p class="pitch-hero-subtitle">A live startup pitch competition meets concert energy — Raise capital, build relationships, get seen by Bay Area innovators.</p>
-            <a href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815" target="_blank" rel="noopener" class="btn btn-primary" style="display:block; width:fit-content; margin: 44px auto 0;">GET TICKETS</a>
         </div>
     </section>
 
@@ -886,8 +958,8 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq">
+    <!-- FAQ Section (hidden post-event; questions were pre-event-oriented) -->
+    <section class="faq" hidden>
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-list">
@@ -972,25 +1044,6 @@
         </div>
     </footer>
 
-    <a id="float-tickets"
-       class="float-tickets"
-       href="https://ci.ovationtix.com/36995/production/1265498?performanceId=11765815"
-       target="_blank" rel="noopener noreferrer">
-        <img src="assets/ticketsbuttontexture.png" alt="Get Tickets">
-    </a>
-
-    <script>
-    (function () {
-        var heroBtn  = document.getElementById('hero-tickets-btn');
-        var floatBtn = document.getElementById('float-tickets');
-        if (!heroBtn || !floatBtn) return;
-        var observer = new IntersectionObserver(function (entries) {
-            floatBtn.classList.toggle('is-visible', !entries[0].isIntersecting);
-        });
-        observer.observe(heroBtn);
-    })();
-    </script>
-
-    <script src="app.js?v=7"></script>
+    <script src="app.js?v=8"></script>
 </body>
 </html>

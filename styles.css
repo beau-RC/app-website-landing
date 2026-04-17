@@ -173,259 +173,241 @@ a:hover {
 }
 
 /* ================================
-   Hero Section
+   Hero Section (video, post-event)
    ================================ */
 .hero {
     position: relative;
     background: #0a0a0a;
 }
 
-.hero-container {
+.hero--video {
     position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 32px 20px 48px;
+    background-image: url('assets/optimized/hero-bg.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    background-color: #0a0a0a;
+    overflow: hidden;
 }
 
-.hero-bg {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.hero-content {
+.hero-bg-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at center, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.45) 75%, rgba(10,10,10,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-video-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 14px;
 }
 
-/* CO-FOUNDERS Logo */
 .hero-logo-cofounders {
-    position: absolute;
-    top: 2%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    max-width: 600px;
+    width: clamp(260px, 55vw, 600px);
     height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.6));
 }
 
-/* Presents Text */
-.hero-presents {
+/* APP logo — reduced 25% from previous clamp(180px, 38vw, 380px) */
+.hero-logo-app {
+    width: clamp(135px, 28.5vw, 285px);
+    height: auto;
+    display: block;
+    margin-top: -4px;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+}
+
+.hero-video-frame {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    margin-top: 12px;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    background: #000;
+}
+
+/* Sound toggle button (overlay top-left of video) */
+.hero-video-sound {
     position: absolute;
-    top: 9%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 14px;
+    top: 14px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(10, 10, 10, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    border-radius: 999px;
+    cursor: pointer;
     font-family: var(--font-body);
-    font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+    font-size: 0.78rem;
     font-weight: 500;
-    color: #FFFFFF;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-video-sound:hover {
+    background: rgba(10, 10, 10, 0.75);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-video-sound:active {
+    transform: scale(0.97);
+}
+
+.hero-video-sound-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.hero-video-sound-icon--on {
+    display: none;
+}
+
+.hero-video-sound.is-on .hero-video-sound-icon--muted {
+    display: none;
+}
+
+.hero-video-sound.is-on .hero-video-sound-icon--on {
+    display: block;
+}
+
+.hero-video-sound-label {
     white-space: nowrap;
 }
 
-/* Event Title Image - anchored to TV screen center */
-.hero-title-img {
-    position: absolute;
-    top: 26%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    max-width: 400px;
-    height: auto;
-}
-
-/* Buy Tickets Button */
-.btn-tickets {
-    position: absolute;
-    top: 43%;
-    left: calc(50% + 4px);
-    transform: translateX(-50%);
-    display: inline-block;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.btn-tickets img {
-    width: clamp(144px, 32vw, 256px);
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.btn-tickets:hover {
-    transform: translateX(-50%) translateY(-3px);
-}
-
-.btn-tickets:hover img {
-    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4)) brightness(1.05);
-}
-
-.btn-tickets:active {
-    transform: translateX(-50%) translateY(-1px);
-}
-
-/* Pitches Powered By */
-.hero-powered {
-    position: absolute;
-    top: 51%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.hero-powered span {
-    font-family: var(--font-body);
-    font-size: clamp(0.6rem, 2vw, 0.9rem);
-    font-weight: 500;
-    color: #FFFFFF;
-    letter-spacing: 0.2em;
+/* "A Demo Day Like No Other" subtitle — matches APP logo color */
+.hero-tagline {
+    margin: 22px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3.2vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-}
-
-.hiiwav-logo {
-    height: clamp(20px, 5vw, 40px);
-    width: auto;
-}
-
-/* Description Text */
-.hero-description {
-    position: absolute;
-    top: 68%;
-    left: 50%;
-    transform: translateX(-50%);
+    color: #FAA06E; /* sampled from APP-Horizontal logo */
     text-align: center;
-    width: 90%;
-    max-width: 500px;
-}
-
-.hero-description p {
-    font-family: var(--font-body);
-    font-size: clamp(0.65rem, 2.2vw, 1rem);
-    font-weight: 600;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    line-height: 1.8;
-    margin: 0;
-}
-
-/* Sponsors */
-.hero-sponsors {
-    position: absolute;
-    top: 76%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    width: 90%;
-}
-
-.hero-sponsors .sponsors-label {
-    font-family: var(--font-body);
-    font-size: clamp(0.5rem, 1.5vw, 0.7rem);
-    font-weight: 500;
-    color: #888888;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-}
-
-.sponsors-img {
-    width: 80%;
-    max-width: 500px;
-    height: auto;
-}
-
-.google-sponsor-img {
-    width: 30%;
-    max-width: 120px;
-    height: auto;
-}
-
-@media (max-width: 750px) {
-    .sponsors-img {
-        max-width: 420px;
-    }
-    .google-sponsor-img {
-        max-width: 105px;
-    }
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
 @media (max-width: 640px) {
-    .hero-sponsors {
-        /* NO top override — keep at 76% to avoid overlapping description text */
-        gap: 3px;
+    .hero--video {
+        padding: 20px 14px 32px;
+        background-position: center 35%;
     }
-
-    .hero-sponsors .sponsors-label {
-        font-size: clamp(0.4rem, 1.2vw, 0.6rem);
+    .hero-video-container {
+        gap: 10px;
     }
-
-    .sponsors-img {
-        width: 68%;
+    .hero-logo-cofounders {
+        width: 90%;
     }
-
-    .google-sponsor-img {
-        width: 28%;
-        max-width: 90px;
+    .hero-logo-app {
+        width: 48.75%; /* 65% * 0.75 */
+    }
+    .hero-video-frame {
+        border-radius: 6px;
+        margin-top: 6px;
+    }
+    .hero-video-sound {
+        left: 10px;
+        top: 10px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+    .hero-video-sound-icon {
+        width: 16px;
+        height: 16px;
+    }
+    .hero-video-sound-label {
+        display: none; /* icon-only on mobile to save space */
+    }
+    .hero-tagline {
+        margin-top: 16px;
     }
 }
 
-@media (max-width: 480px) {
-    .hero-sponsors {
-        gap: 2px;
-    }
-    .sponsors-img {
-        width: 60%;
-    }
-    .google-sponsor-img {
-        width: 25%;
-        max-width: 75px;
-    }
+/* ================================
+   Sponsors Strip (white-on-black)
+   ================================ */
+.sponsors-strip {
+    background: #000;
+    padding: 48px 20px;
+    text-align: center;
 }
 
-/* Venue Bar */
-.hero-venue {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 12%;
-    pointer-events: none;
-}
-
-.hjk-logo {
-    position: absolute;
-    left: 5%;
-    bottom: 75%;
-    height: clamp(34px, 6vw, 54px);
-    width: auto;
-    pointer-events: auto;
-}
-
-.venue-address {
-    position: absolute;
-    left: 5%;
-    bottom: 35%;
+.sponsors-strip-eyebrow {
+    display: block;
     font-family: var(--font-body);
-    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-    font-weight: 700;
-    color: #FFFFFF;
+    font-size: 0.7rem;
+    color: #888;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    pointer-events: auto;
+    letter-spacing: 0.2em;
+    margin-bottom: 28px;
+}
+
+.sponsors-strip-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 36px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.sponsors-strip-logo {
+    height: clamp(28px, 4vw, 44px);
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    filter: brightness(1);
+}
+
+.sponsors-strip-logo--wide {
+    height: clamp(22px, 3vw, 34px);
+    max-width: 200px;
+}
+
+@media (max-width: 640px) {
+    .sponsors-strip {
+        padding: 36px 16px;
+    }
+    .sponsors-strip-row {
+        gap: 22px 28px;
+    }
+    .sponsors-strip-logo {
+        height: 26px;
+    }
+    .sponsors-strip-logo--wide {
+        height: 22px;
+    }
 }
 
 /* ================================
@@ -1485,31 +1467,7 @@ textarea.error {
 /* ================================
    Responsive Adjustments
    ================================ */
-@media (min-width: 801px) {
-    .hero-container {
-        max-width: 100%;
-    }
-
-    .hero-logo-cofounders {
-        width: 55%;
-        max-width: 700px;
-    }
-
-    .hero-title-img {
-        width: 38%;
-        max-width: 500px;
-    }
-}
-
 @media (max-width: 480px) {
-    .hero-logo-cofounders {
-        width: 95%;
-    }
-
-    .hero-title-img {
-        width: 60%;
-    }
-
     .multi-step-form {
         padding: 20px;
     }
@@ -1742,6 +1700,17 @@ textarea.error {
 .photo-gallery {
     padding: 60px 20px;
     background: var(--color-dark);
+}
+
+/* APP-event gallery: "This Happened" heading in chapter-title style */
+.app-gallery-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 36px;
+    text-align: center;
 }
 
 .photo-gallery .section-title {
@@ -2013,44 +1982,6 @@ textarea.error {
 .btn-hackathon:hover {
     background: #4C1D95;
     transform: translateY(-2px);
-}
-
-/* ========== Floating Tickets Button ========== */
-.float-tickets {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 500;
-    display: block;
-    text-decoration: none;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-6px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-}
-
-.float-tickets img {
-    display: block;
-    width: 140px;
-    height: auto;
-}
-
-.float-tickets.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.float-tickets:hover {
-    transform: translateY(-2px);
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.5)) brightness(1.05);
-}
-
-.float-tickets.form-open {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-6px);
 }
 
 /* ================================
@@ -2373,6 +2304,44 @@ textarea.error {
     .finalists-content {
         max-width: 100%;
         padding: 0 16px;
+    }
+}
+
+/* Universal fix for the TV-label / APP-header clipping bug:
+   .finalists-sticky has height:100vh + overflow:hidden + align-items:center.
+   When content + rotated label extent > viewport height, centering causes
+   the TOP of the header-img and the rotated TOP-N-FINALIST label to be
+   clipped by the sticky's top edge. Top-align with padding gives room. */
+@media (min-width: 769px) {
+    .finalists-sticky {
+        padding-top: 40px;
+        align-items: flex-start;
+    }
+    .finalists-title-img {
+        top: 36px;
+    }
+    .finalists-title-img.is-top3 {
+        top: 30px;
+    }
+}
+
+/* Tablet/medium widths: also shrink the header and TV so the whole stack
+   fits comfortably within 100vh without bottom clipping. */
+@media (min-width: 769px) and (max-width: 1400px) {
+    .finalists-header-img {
+        max-width: 420px;
+        margin-bottom: 14px;
+    }
+    .finalists-tv-wrap {
+        max-width: 560px;
+    }
+}
+
+/* Wide viewports with short height need a touch of shrinkage too. */
+@media (min-width: 1401px) and (max-height: 900px) {
+    .finalists-header-img {
+        max-width: 480px;
+        margin-bottom: 14px;
     }
 }
 
