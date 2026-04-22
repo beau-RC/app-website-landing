@@ -11,11 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=15">
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <!-- Preload hero background + video poster for instant first paint -->
     <link rel="preload" as="image" href="assets/optimized/hero-bg.jpg">
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dok3pm3cw/video/upload/so_0,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_v2.jpg">
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dok3pm3cw/video/upload/so_1,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_final.jpg">
     <!-- Preload critical TV images so the animated module starts immediately -->
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/Blank-TV.avif">
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/GrioTime-clean-TV2.avif">
@@ -34,13 +34,13 @@
                     class="hero-video"
                     autoplay muted loop playsinline preload="metadata"
                     disableremoteplayback
-                    poster="https://res.cloudinary.com/dok3pm3cw/video/upload/so_0,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_v2.jpg">
-                    <!-- Mobile: ~4.7 MB (was ~19.8 MB on iOS) -->
-                    <source media="(max-width: 768px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto:eco,vc_auto,w_720/cofounders-gallery/app-event/sizzle_v2.mp4" type="video/mp4">
-                    <!-- Tablet / small desktop: ~7 MB -->
-                    <source media="(max-width: 1280px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto,vc_auto,w_1280/cofounders-gallery/app-event/sizzle_v2.mp4" type="video/mp4">
-                    <!-- Desktop / large: Cloudinary auto-selects VP9/WebM when supported (~10 MB) -->
-                    <source src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto,vc_auto,w_1600/cofounders-gallery/app-event/sizzle_v2.mp4" type="video/mp4">
+                    poster="https://res.cloudinary.com/dok3pm3cw/video/upload/so_1,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_final.jpg">
+                    <!-- Mobile: ~5.1 MB delivered (H.264 MP4 via Cloudinary eco quality) -->
+                    <source media="(max-width: 768px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto:eco,vc_auto,w_720/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
+                    <!-- Tablet: ~9.5 MB delivered (q_auto:eco saves ~2.5 MB vs q_auto) -->
+                    <source media="(max-width: 1280px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto:eco,vc_auto,w_1280/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
+                    <!-- Desktop: Cloudinary auto-selects VP9/WebM for Chrome (~10 MB), H.264 MP4 for Safari (~16.6 MB) -->
+                    <source src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto,vc_auto,w_1600/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
                 </video>
                 <button id="heroVideoSound" class="hero-video-sound" type="button" aria-label="Unmute video" aria-pressed="false">
                     <svg class="hero-video-sound-icon hero-video-sound-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
