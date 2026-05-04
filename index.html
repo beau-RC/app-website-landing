@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <!-- Preload hero background + video poster for instant first paint -->
     <link rel="preload" as="image" href="assets/optimized/hero-bg.jpg">
-    <link rel="preload" as="image" href="https://res.cloudinary.com/dok3pm3cw/video/upload/so_1,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_final.jpg">
+    <link rel="preload" as="image" href="assets/video/sizzle_final_poster.jpg">
     <!-- Preload critical TV images so the animated module starts immediately -->
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/Blank-TV.avif">
     <link rel="preload" as="image" type="image/avif" href="assets/update assets/TV-Web PNGs/GrioTime-clean-TV2.avif">
@@ -34,13 +34,9 @@
                     class="hero-video"
                     autoplay muted loop playsinline preload="metadata"
                     disableremoteplayback
-                    poster="https://res.cloudinary.com/dok3pm3cw/video/upload/so_1,f_jpg,q_auto,w_1200/cofounders-gallery/app-event/sizzle_final.jpg">
-                    <!-- Mobile: ~5.1 MB delivered (H.264 MP4 via Cloudinary eco quality) -->
-                    <source media="(max-width: 768px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto:eco,vc_auto,w_720/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
-                    <!-- Tablet: ~9.5 MB delivered (q_auto:eco saves ~2.5 MB vs q_auto) -->
-                    <source media="(max-width: 1280px)" src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto:eco,vc_auto,w_1280/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
-                    <!-- Desktop: Cloudinary auto-selects VP9/WebM for Chrome (~10 MB), H.264 MP4 for Safari (~16.6 MB) -->
-                    <source src="https://res.cloudinary.com/dok3pm3cw/video/upload/f_auto,q_auto,vc_auto,w_1600/cofounders-gallery/app-event/sizzle_final.mp4" type="video/mp4">
+                    poster="assets/video/sizzle_final_poster.jpg">
+                    <source media="(max-width: 768px)" src="assets/video/sizzle_final_720.mp4" type="video/mp4">
+                    <source src="assets/video/sizzle_final_1280.mp4" type="video/mp4">
                 </video>
                 <button id="heroVideoSound" class="hero-video-sound" type="button" aria-label="Unmute video" aria-pressed="false">
                     <svg class="hero-video-sound-icon hero-video-sound-icon--muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -157,37 +153,37 @@
             <h2 class="app-gallery-heading">It Happened in Oakland&hellip;</h2>
             <div class="gallery-wrap" id="appGalleryWrap">
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0742" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7646" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130246" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0538" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7572" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0540" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7587" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0552" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7592" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0565" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7603" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0585" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7628" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0591" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7641" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0600" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0611" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_7675" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0619" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_E7507" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0627" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_E7549" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0638" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0691" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130299" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0715" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/P1130310" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0739" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0740" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0750" alt="" loading="lazy" class="gallery-img"></div>
-                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/app-event/IMG_0754" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0742" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7646" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/P1130246" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0538" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7572" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0540" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7587" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0552" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7592" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0565" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7603" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0585" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7628" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0591" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7641" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0600" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0611" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_7675" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0619" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_E7507" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0627" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_E7549" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0638" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0691" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/P1130299" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0715" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/P1130310" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0739" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0740" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0750" alt="" loading="lazy" class="gallery-img"></div>
+                    <div class="gallery-item"><img src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/app-event/IMG_0754" alt="" loading="lazy" class="gallery-img"></div>
                 </div>
                 <div class="gallery-fade"></div>
             </div>
@@ -407,7 +403,7 @@
                 <div class="gallery-grid">
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_100"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/performance/CFS_100"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -415,7 +411,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_8593"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/vibes/DSC_8593"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -423,7 +419,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_134"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/performance/CFS_134"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -431,7 +427,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9139"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/vibes/DSC_9139"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -439,7 +435,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_143"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/performance/CFS_143"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -447,7 +443,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_8955"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/vibes/DSC_8955"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -455,7 +451,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_186"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/performance/CFS_186"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -463,7 +459,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9153"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/vibes/DSC_9153"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -471,7 +467,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/performance/CFS_306"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/performance/CFS_306"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
@@ -479,7 +475,7 @@
                     </div>
                     <div class="gallery-item">
                         <img
-                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_1200/cofounders-gallery/vibes/DSC_9237"
+                            src="https://res.cloudinary.com/dok3pm3cw/image/upload/f_auto,q_auto,w_600/cofounders-gallery/vibes/DSC_9237"
                             alt=""
                             loading="lazy"
                             class="gallery-img"
